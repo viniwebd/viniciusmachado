@@ -168,9 +168,9 @@ export function WorkHistory() {
   return (
     <section className="bg-[#f0f0ee] py-[96px]">
       <div className="mx-auto max-w-[1440px] px-[80px]">
-        <div className="flex gap-[80px]">
-          {/* Coluna esquerda */}
-          <div className="w-[560px] flex-shrink-0">
+        <div className="flex gap-[80px] items-start">
+          {/* Coluna esquerda — sticky */}
+          <div className="w-[560px] flex-shrink-0 sticky top-[96px]">
             <h2
               className="text-[38px] font-bold leading-[1.15] text-[#1a1a1a] mb-[24px]"
               style={{ fontVariationSettings: '"opsz" 14' }}
