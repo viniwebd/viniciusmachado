@@ -18,9 +18,9 @@ const esteSiteLinks = [
 export function Footer() {
   return (
     <footer className="bg-[#1a1a1a]">
-      <div className="mx-auto max-w-[1440px] px-[80px] pt-[64px]">
+      <div className="mx-auto max-w-[1440px] px-[24px] md:px-[40px] lg:px-[80px] pt-[48px] md:pt-[56px] lg:pt-[64px]">
         {/* Main row */}
-        <div className="flex gap-[80px] mb-[64px]">
+        <div className="flex flex-col md:flex-row gap-[40px] md:gap-[60px] lg:gap-[80px] mb-[48px] md:mb-[56px] lg:mb-[64px]">
           {/* Coluna esquerda */}
           <div className="flex-1">
             <p
@@ -35,13 +35,13 @@ export function Footer() {
             >
               Vinicius Machado
             </p>
-            <SocialLinks light />
+            <SocialLinks light iconSize={20} gap={12} />
           </div>
 
           {/* Sobre mim */}
           <div className="w-[180px] flex-shrink-0">
             <p
-              className="text-[20px] font-medium leading-[1.3] text-[#f0f0ee] mb-[11px]"
+              className="text-[14px] md:text-[20px] font-medium leading-[1.3] text-[#f0f0ee] mb-[11px]"
               style={{ fontVariationSettings: '"opsz" 14' }}
             >
               Sobre mim
@@ -64,7 +64,7 @@ export function Footer() {
           {/* Este site */}
           <div className="w-[150px] flex-shrink-0">
             <p
-              className="text-[20px] font-medium leading-[1.3] text-[#f0f0ee] mb-[12px]"
+              className="text-[14px] md:text-[20px] font-medium leading-[1.3] text-[#f0f0ee] mb-[12px]"
               style={{ fontVariationSettings: '"opsz" 14' }}
             >
               Este site
@@ -92,15 +92,15 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-[rgba(240,240,238,0.12)] py-[24px] flex items-center justify-between">
+        <div className="border-t border-[rgba(240,240,238,0.12)] py-[24px] flex flex-col md:flex-row items-start md:items-center justify-between gap-[8px] md:gap-0">
           <p
-            className="text-[12px] leading-[1.4] text-[rgba(240,240,238,0.4)]"
+            className="w-full text-center md:w-auto md:text-left text-[12px] leading-[1.4] text-[rgba(240,240,238,0.4)]"
             style={{ fontVariationSettings: '"opsz" 14' }}
           >
             © 2026 Vinicius Machado. Todos os direitos reservados.
           </p>
           <p
-            className="text-[12px] leading-[1.4] text-[rgba(240,240,238,0.4)]"
+            className="w-full text-center md:w-auto md:text-left text-[12px] leading-[1.4] text-[rgba(240,240,238,0.4)]"
             style={{ fontVariationSettings: '"opsz" 14' }}
           >
             Última atualização por Vinicius em 08/06/2026

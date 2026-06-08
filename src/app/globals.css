@@ -5,6 +5,7 @@
   --color-light: #f0f0ee;
   --color-green: #aadf3a;
   --font-sans: var(--font-dm-sans), sans-serif;
+  --animate-marquee: marquee 18s linear infinite;
 }
 
 @keyframes marquee {

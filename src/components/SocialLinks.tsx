@@ -2,17 +2,17 @@ const links = [
   {
     name: "WhatsApp",
     icon: "/assets/icon-whatsapp.svg",
-    href: "https://wa.me/5500000000000",
+    href: "https://wa.me/5551994231006?text=Ol%C3%A1%20Vini.%20Vim%20pelo%20seu%20portfolio",
   },
   {
     name: "Email",
     icon: "/assets/icon-email.svg",
-    href: "mailto:vini.webd@gmail.com",
+    href: "mailto:contato@viniciusmachado.com",
   },
   {
     name: "LinkedIn",
     icon: "/assets/icon-linkedin.svg",
-    href: "https://linkedin.com/in/viniciusmachado",
+    href: "https://www.linkedin.com/in/vinicius-webdesigner/",
   },
   {
     name: "GitHub",
@@ -22,15 +22,15 @@ const links = [
   {
     name: "Behance",
     icon: "/assets/icon-behance.svg",
-    href: "https://behance.net/viniciusmachado",
+    href: "https://www.behance.net/viniciusmach",
   },
 ];
 
-type Props = { light?: boolean };
+type Props = { light?: boolean; iconSize?: number; gap?: number };
 
-export function SocialLinks({ light = false }: Props) {
+export function SocialLinks({ light = false, iconSize = 28, gap = 16 }: Props) {
   return (
-    <div className="flex items-center gap-[16px]">
+    <div className="flex items-center" style={{ gap }}>
       {links.map((link) => (
         <a
           key={link.name}
@@ -38,7 +38,8 @@ export function SocialLinks({ light = false }: Props) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={link.name}
-          className="w-[28px] h-[28px] flex-shrink-0 transition-opacity hover:opacity-70"
+          className="flex-shrink-0 transition-opacity hover:opacity-70"
+          style={{ width: iconSize, height: iconSize }}
         >
           <img
             src={link.icon}

@@ -1,3 +1,5 @@
+import { Badge } from "@/components/ui/Badge";
+
 type Course = {
   provider: string;
   description: string;
@@ -22,28 +24,12 @@ const courses: Course[] = [
   },
 ];
 
-function StatusBadge({ status }: { status: Course["status"] }) {
-  const styles =
-    status === "Concluído"
-      ? "bg-[rgba(170,223,58,0.15)] border-[rgba(170,223,58,0.6)] text-[#1a1a1a]"
-      : "bg-[rgba(255,165,0,0.12)] border-[rgba(255,165,0,0.5)] text-[#1a1a1a]";
-
-  return (
-    <span
-      className={`inline-flex items-center px-[12px] py-[5px] rounded-full border text-[12px] font-medium leading-[1.4] ${styles}`}
-      style={{ fontVariationSettings: '"opsz" 14' }}
-    >
-      {status}
-    </span>
-  );
-}
-
 export function Courses() {
   return (
-    <section className="bg-[#f0f0ee] py-[96px]">
-      <div className="mx-auto max-w-[1440px] px-[80px]">
+    <section className="bg-[#f0f0ee] py-[60px] md:py-[80px] lg:py-[96px]">
+      <div className="mx-auto max-w-[1440px] px-[24px] md:px-[40px] lg:px-[80px]">
         <h2
-          className="text-[38px] font-bold leading-[1.15] text-[#1a1a1a] mb-[76px]"
+          className="text-[28px] md:text-[32px] lg:text-[38px] font-bold leading-[1.15] text-[#1a1a1a] mb-[40px] md:mb-[56px] lg:mb-[76px]"
           style={{ fontVariationSettings: '"opsz" 14' }}
         >
           Cursos &amp; Certificações
@@ -52,10 +38,10 @@ export function Courses() {
         <div>
           {courses.map((course, i) => (
             <div key={course.provider}>
-              <div className="flex items-center justify-between py-[24px]">
-                <div>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-[12px] md:gap-0 py-[24px]">
+                <div className="md:pr-[40px]">
                   <p
-                    className="text-[20px] font-medium leading-[1.3] text-[#1a1a1a] mb-[4px]"
+                    className="text-[18px] md:text-[20px] font-medium leading-[1.3] text-[#1a1a1a] mb-[4px]"
                     style={{ fontVariationSettings: '"opsz" 14' }}
                   >
                     {course.provider}
@@ -67,14 +53,16 @@ export function Courses() {
                     {course.description}
                   </p>
                 </div>
-                <div className="flex items-center gap-[16px] flex-shrink-0 ml-[40px]">
+                <div className="flex items-center gap-[12px] md:gap-[16px] flex-shrink-0">
                   <span
-                    className="text-[14px] leading-[1.6] text-[rgba(26,26,26,0.6)]"
+                    className="text-[13px] md:text-[14px] leading-[1.6] text-[rgba(26,26,26,0.6)]"
                     style={{ fontVariationSettings: '"opsz" 14' }}
                   >
                     {course.year}
                   </span>
-                  <StatusBadge status={course.status} />
+                  <Badge variant="green" size="sm">
+                    {course.status}
+                  </Badge>
                 </div>
               </div>
               {i < courses.length - 1 && (

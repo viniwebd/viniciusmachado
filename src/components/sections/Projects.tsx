@@ -1,38 +1,21 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
+import { projects, type ProjectData } from "@/data/projects";
+import { ProjectModal } from "@/components/ProjectModal";
 
-type Project = {
-  title: string;
-  image: string;
-  tags: string[];
-  href: string;
-};
-
-const projects: Project[] = [
-  {
-    title: "San Marino",
-    image: "/assets/project-sanmarino.png",
-    tags: ["WordPress", "Jet Engine", "UI Design", "Site Institucional", "Integrações"],
-    href: "#",
-  },
-  {
-    title: "Ogliari & Carvalho Advocacia",
-    image: "/assets/project-ogliari.png",
-    tags: ["WordPress", "UI Design", "Site Institucional"],
-    href: "#",
-  },
-  {
-    title: "Izex Services LLC",
-    image: "/assets/project-izex.png",
-    tags: ["WordPress", "UI Design", "Site Institucional", "Landing Page"],
-    href: "#",
-  },
-];
-
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({
+  project,
+  onClick,
+}: {
+  project: ProjectData;
+  onClick: () => void;
+}) {
   return (
-    <a
-      href={project.href}
-      className="relative flex flex-col justify-end gap-[10px] overflow-hidden rounded-[16px] p-[20px] h-[520px] flex-1 group"
+    <button
+      onClick={onClick}
+      className="relative flex flex-col justify-end gap-[10px] overflow-hidden rounded-[16px] p-[20px] h-[400px] md:h-[460px] lg:h-[520px] group text-left w-full cursor-pointer"
     >
       {/* Imagem de fundo */}
       <Image
@@ -75,33 +58,39 @@ function ProjectCard({ project }: { project: Project }) {
           Ver case
         </span>
         <div className="w-[22px] h-[22px] flex-shrink-0">
-          <img
-            src="/assets/icon-arrow-case.svg"
-            alt=""
-            className="w-full h-full"
-          />
+          <img src="/assets/icon-arrow-case.svg" alt="" className="w-full h-full" />
         </div>
       </div>
-    </a>
+    </button>
   );
 }
 
 export function Projects() {
+  const [selected, setSelected] = useState<ProjectData | null>(null);
+
   return (
-    <section id="portfolio" className="bg-[#f0f0ee] py-[96px]">
-      <div className="mx-auto max-w-[1440px] px-[80px]">
-        <h2
-          className="text-[38px] font-bold leading-[1.15] text-[#1a1a1a] text-center mb-[76px]"
-          style={{ fontVariationSettings: '"opsz" 14' }}
-        >
-          Portfólio
-        </h2>
-        <div className="flex gap-[24px]">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
-          ))}
+    <>
+      <section id="portfolio" className="bg-[#f0f0ee] py-[60px] md:py-[80px] lg:py-[96px]">
+        <div className="mx-auto max-w-[1440px] px-[24px] md:px-[40px] lg:px-[80px]">
+          <h2
+            className="text-[28px] md:text-[32px] lg:text-[38px] font-bold leading-[1.15] text-[#1a1a1a] text-center mb-[40px] md:mb-[56px] lg:mb-[76px]"
+            style={{ fontVariationSettings: '"opsz" 14' }}
+          >
+            Portfólio
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[16px] md:gap-[20px] lg:gap-[24px]">
+            {projects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onClick={() => setSelected(project)}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <ProjectModal project={selected} onClose={() => setSelected(null)} />
+    </>
   );
 }
