@@ -26,7 +26,9 @@ const links = [
   },
 ];
 
-export function SocialLinks() {
+type Props = { light?: boolean };
+
+export function SocialLinks({ light = false }: Props) {
   return (
     <div className="flex items-center gap-[16px]">
       {links.map((link) => (
@@ -36,12 +38,14 @@ export function SocialLinks() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={link.name}
-          className="w-[28px] h-[28px] transition-opacity hover:opacity-70 flex-shrink-0"
+          className="w-[28px] h-[28px] flex-shrink-0 transition-opacity hover:opacity-70"
         >
           <img
             src={link.icon}
             alt={link.name}
-            className="w-full h-full object-contain"
+            className={`w-full h-full object-contain ${
+              light ? "brightness-0 invert" : ""
+            }`}
           />
         </a>
       ))}

@@ -183,11 +183,20 @@ export function WorkHistory() {
               produtos e da estratégia. Veja como essa jornada se desenrolou.
             </p>
 
-            {/* Ferramentas */}
-            <div className="flex flex-wrap gap-[24px]">
-              {tools.map((tool) => (
-                <ToolCard key={tool.name} tool={tool} />
-              ))}
+            {/* Carrossel de ferramentas */}
+            <div className="group relative overflow-hidden">
+              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-[60px] bg-gradient-to-r from-[#f0f0ee] to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-[60px] bg-gradient-to-l from-[#f0f0ee] to-transparent" />
+              <div
+                className="flex animate-[marquee_18s_linear_infinite] group-hover:[animation-play-state:paused]"
+                style={{ width: "max-content" }}
+              >
+                {[...tools, ...tools].map((tool, i) => (
+                  <div key={i} className="mr-[24px]">
+                    <ToolCard tool={tool} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 

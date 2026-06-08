@@ -1,24 +1,8 @@
 const contactLinks = [
-  {
-    label: "WhatsApp",
-    href: "https://wa.me/5500000000000",
-    icon: "/assets/icon-whatsapp.svg",
-  },
-  {
-    label: "LinkedIn",
-    href: "https://linkedin.com/in/viniciusmachado",
-    icon: "/assets/icon-linkedin.svg",
-  },
-  {
-    label: "Email",
-    href: "mailto:vini.webd@gmail.com",
-    icon: "/assets/icon-email.svg",
-  },
-  {
-    label: "Download CV",
-    href: "/cv.pdf",
-    icon: null,
-  },
+  { label: "WhatsApp", href: "https://wa.me/5500000000000" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/viniciusmachado" },
+  { label: "Email", href: "mailto:vini.webd@gmail.com" },
+  { label: "Download CV", href: "/cv.pdf" },
 ];
 
 export function Contact() {
@@ -50,16 +34,9 @@ export function Contact() {
                     ? "noopener noreferrer"
                     : undefined
                 }
-                className="inline-flex items-center gap-[8px] rounded-full h-[42px] px-[24px] text-[14px] font-medium border border-[rgba(240,240,238,0.42)] text-[#f0f0ee] hover:bg-[rgba(240,240,238,0.08)] transition-colors whitespace-nowrap"
+                className="inline-flex items-center justify-center rounded-full h-[42px] px-[24px] text-[14px] font-medium border border-[rgba(240,240,238,0.42)] text-[#f0f0ee] hover:bg-[rgba(240,240,238,0.08)] transition-colors whitespace-nowrap"
                 style={{ fontVariationSettings: '"opsz" 14' }}
               >
-                {link.icon && (
-                  <img
-                    src={link.icon}
-                    alt=""
-                    className="w-[16px] h-[16px] object-contain brightness-[10]"
-                  />
-                )}
                 {link.label}
               </a>
             ))}

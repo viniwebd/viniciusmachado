@@ -42,8 +42,8 @@ function ProjectCard({ project }: { project: Project }) {
         className="object-cover transition-transform duration-500 group-hover:scale-105"
       />
 
-      {/* Overlay escuro na base */}
-      <div className="absolute inset-x-0 bottom-0 h-[116px] bg-[#1a1a1a]" />
+      {/* Gradient overlay */}
+      <div className="absolute inset-x-0 bottom-0 h-[280px] bg-gradient-to-t from-[#1a1a1a] to-transparent" />
 
       {/* Título */}
       <p

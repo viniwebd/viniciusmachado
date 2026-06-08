@@ -7,9 +7,12 @@ const sobreMimLinks = [
 ];
 
 const esteSiteLinks = [
-  { label: "Código-fonte", href: "https://github.com/viniwebd/viniciusmachado" },
-  { label: "Política de Privacidade", href: "/privacidade" },
-  { label: "Termos de Uso", href: "/termos" },
+  {
+    label: "Código-fonte",
+    href: "https://github.com/viniwebd/viniciusmachado",
+  },
+  { label: "Política de Privacidade", href: "/politica-de-privacidade" },
+  { label: "Termos de Uso", href: "/termos-de-uso" },
 ];
 
 export function Footer() {
@@ -32,7 +35,7 @@ export function Footer() {
             >
               Vinicius Machado
             </p>
-            <SocialLinks />
+            <SocialLinks light />
           </div>
 
           {/* Sobre mim */}

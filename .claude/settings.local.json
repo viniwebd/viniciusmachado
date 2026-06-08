@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rtk ls *)",
+      "Bash(git init *)",
+      "Bash(git remote *)",
+      "Bash(rtk git *)",
+      "Bash(rtk npx *)",
+      "Bash(npm install *)",
+      "Bash(npm audit *)",
+      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\('next:', p.dependencies.next\\)\")",
+      "Bash(git checkout *)",
+      "mcp__figma-local__get_metadata",
+      "mcp__figma-local__get_design_context",
+      "Bash(python *)",
+      "Bash(mkdir -p \"C:/Users/vinim/OneDrive/Área de Trabalho/VSCode/viniciusmachado/public/assets\")",
+      "Bash(curl -sf \"http://localhost:3845/assets/196d4e5580a7ef6dbf2175525512fc2a2dbd99be.svg\" -o icon-whatsapp.svg)",
+      "Bash(curl -sf \"http://localhost:3845/assets/bbccd79b9b46fc123f03e6edb2d7dbf5498d2805.svg\" -o icon-email.svg)",
+      "Bash(curl -sf \"http://localhost:3845/assets/90a920a5ea0870b375a2abb82040c1195cf0cce5.svg\" -o icon-linkedin.svg)",
+      "Bash(curl -sf \"http://localhost:3845/assets/55a54ec32048cd140d4f82a63e1fe9f4d8f52226.svg\" -o icon-github-social.svg)",
+      "PowerShell(python C:\\\\Users\\\\vinim\\\\extract_urls.py)",
+      "PowerShell(python C:\\\\Users\\\\vinim\\\\extract_urls_deep.py)",
+      "PowerShell(python C:\\\\Users\\\\vinim\\\\extract_jsxsection.py)",
+      "PowerShell(python C:\\\\Users\\\\vinim\\\\extract_cards.py)",
+      "PowerShell(python C:\\\\Users\\\\vinim\\\\extract_final.py)",
+      "PowerShell(python C:\\\\Users\\\\vinim\\\\extract_verify.py)",
+      "PowerShell(python C:\\\\Users\\\\vinim\\\\extract_card504.py)",
+      "Bash(curl -sf \"http://localhost:3845/assets/4d064fbc8c5aa4a6154819372bd15ffc1dde6c75.svg\" -o tool-wordpress.svg)",
+      "Bash(curl -sf \"http://localhost:3845/assets/1cb39f036aeee1e237a1b864eceb0d62c746f55a.svg\" -o tool-figma-1.svg)",
+      "Bash(curl -sf \"http://localhost:3845/assets/42fb3d8f3a42c9b1f15d8e400745875b53858695.svg\" -o tool-figma-2.svg)",
+      "Bash(curl -sf \"http://localhost:3845/assets/5b7a87fe2f0d24cf3c82ec0efb66d0cf05e5a56f.svg\" -o tool-figma-3.svg)",
+      "Bash(curl -sf \"http://localhost:3845/assets/371adab1b6667281f1d105cdde17159af8e5e946.svg\" -o tool-figma-4.svg)",
+      "Bash(rtk npm *)"
+    ]
+  }
+}
