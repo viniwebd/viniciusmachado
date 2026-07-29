@@ -9,7 +9,7 @@ export const BioProjectsCarousel = forwardRef<HTMLDivElement>(
   function BioProjectsCarousel(_, ref) {
     return (
       <section ref={ref} className="flex flex-col gap-[16px]">
-        <p className="text-[16px] font-medium leading-[18px] tracking-[-0.015em] text-black">
+        <p className="text-[15px] font-medium leading-[18px] tracking-[-0.015em] text-black md:text-[16px]">
           Projetos em destaque
         </p>
 
@@ -20,9 +20,9 @@ export const BioProjectsCarousel = forwardRef<HTMLDivElement>(
               return (
                 <li
                   key={project.id}
-                  className="flex w-[280px] flex-shrink-0 flex-col gap-[8px] rounded-[16px] border border-black/10 bg-white p-[8px] transition-colors hover:border-[#aadf3a]"
+                  className="flex w-[280px] flex-shrink-0 flex-col rounded-[16px] border border-black/10 bg-white p-[8px] transition-colors hover:border-[#aadf3a]"
                 >
-                  <div className="relative aspect-[264/232] w-full overflow-hidden rounded-[10px] bg-black/5">
+                  <div className="relative aspect-[264/242] w-full overflow-hidden rounded-[10px] bg-black/5">
                     <Image
                       src={project.image}
                       alt={project.title}
@@ -32,11 +32,11 @@ export const BioProjectsCarousel = forwardRef<HTMLDivElement>(
                       draggable={false}
                     />
                   </div>
-                  <div className="flex flex-col gap-[2px] px-[4px] pb-[4px]">
-                    <p className="truncate text-[16px] font-medium leading-[22px] tracking-[-0.02em] text-black">
+                  <div className="mt-[8px] flex flex-col gap-[4px] px-[4px] pb-[4px]">
+                    <p className="truncate text-[15px] font-medium leading-[18px] tracking-[-0.02em] text-black md:text-[16px] md:leading-[22px]">
                       {project.title}
                     </p>
-                    <p className="truncate text-[13px] leading-[18px] tracking-[-0.01em] text-[#706b6b]">
+                    <p className="truncate text-[12px] leading-[12px] tracking-[-0.01em] text-[#706b6b] md:text-[13px] md:leading-[18px]">
                       {subtitle || "Web Design • UI Design"}
                     </p>
                   </div>

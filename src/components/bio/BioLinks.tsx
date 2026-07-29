@@ -49,7 +49,7 @@ export function BioLinks({
   itemsRef?: React.MutableRefObject<(HTMLAnchorElement | null)[]>;
 }) {
   return (
-    <ul className="flex flex-col gap-[16px]">
+    <ul className="flex flex-col gap-[12px]">
       {items.map((item, i) => {
         const trailingIcon =
           item.action === "download" ? "/icons/download.svg" : "/icons/link.svg";
@@ -64,21 +64,29 @@ export function BioLinks({
               rel="noopener noreferrer"
               className="group flex items-center gap-[16px] rounded-[16px] border border-black/10 bg-white p-[12px] transition-colors hover:border-[#aadf3a]"
             >
-              <div className="flex h-[40px] w-[40px] flex-shrink-0 items-center justify-center rounded-full bg-[#aadf3a]">
+              <div className="flex h-[30px] w-[30px] flex-shrink-0 items-center justify-center rounded-full bg-[#aadf3a] md:h-[40px] md:w-[40px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={item.icon} alt="" width={26} height={26} />
+                <img
+                  src={item.icon}
+                  alt=""
+                  className="h-[20px] w-[20px] md:h-[26px] md:w-[26px]"
+                />
               </div>
-              <div className="flex min-w-0 flex-1 flex-col gap-[2px]">
-                <p className="truncate text-[16px] font-medium leading-[22px] tracking-[-0.02em] text-black">
+              <div className="flex min-w-0 flex-1 flex-col gap-[4px]">
+                <p className="truncate text-[15px] font-medium leading-[18px] tracking-[-0.02em] text-black md:text-[18px] md:leading-[22px]">
                   {item.title}
                 </p>
-                <p className="truncate text-[13px] leading-[16px] tracking-[-0.01em] text-[#706b6b]">
+                <p className="truncate text-[12px] leading-[12px] tracking-[-0.01em] text-[#706b6b] md:text-[13px] md:leading-[14px]">
                   {item.subtitle}
                 </p>
               </div>
-              <div className="flex h-[26px] w-[26px] flex-shrink-0 items-center justify-center">
+              <div className="flex h-[20px] w-[20px] flex-shrink-0 items-center justify-center md:h-[26px] md:w-[26px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={trailingIcon} alt="" width={16} height={16} />
+                <img
+                  src={trailingIcon}
+                  alt=""
+                  className="h-[12px] w-[12px] md:h-[16px] md:w-[16px]"
+                />
               </div>
             </a>
           </li>

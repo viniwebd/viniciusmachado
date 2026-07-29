@@ -39,7 +39,7 @@ export const BioTestimonialsCarousel = forwardRef<HTMLDivElement>(
   function BioTestimonialsCarousel(_, ref) {
     return (
       <section ref={ref} className="flex flex-col gap-[16px]">
-        <p className="text-[16px] font-medium leading-[18px] tracking-[-0.015em] text-black">
+        <p className="text-[15px] font-medium leading-[18px] tracking-[-0.015em] text-black md:text-[16px]">
           Depoimentos
         </p>
 
@@ -50,7 +50,7 @@ export const BioTestimonialsCarousel = forwardRef<HTMLDivElement>(
                 key={t.name}
                 className="flex w-[280px] flex-shrink-0 flex-col justify-between gap-[16px] rounded-[16px] border border-black/10 bg-white p-[12px] transition-colors hover:border-[#aadf3a]"
               >
-                <p className="text-[13px] leading-[18px] tracking-[-0.01em] text-black">
+                <p className="text-[13px] leading-[18px] tracking-[-0.01em] text-black md:text-[14px]">
                   {t.quote}
                 </p>
                 <div className="flex items-center gap-[16px]">
@@ -64,11 +64,11 @@ export const BioTestimonialsCarousel = forwardRef<HTMLDivElement>(
                       draggable={false}
                     />
                   </div>
-                  <div className="flex flex-col gap-[2px]">
-                    <p className="text-[14px] font-medium leading-[18px] tracking-[-0.015em] text-black">
+                  <div className="flex flex-col gap-[4px]">
+                    <p className="text-[15px] font-medium leading-[18px] tracking-[-0.02em] text-black md:text-[16px]">
                       {t.name}
                     </p>
-                    <p className="text-[13px] leading-[18px] tracking-[-0.01em] text-[#706b6b]">
+                    <p className="text-[12px] leading-[12px] tracking-[-0.01em] text-[#706b6b] md:text-[13px] md:leading-[18px]">
                       {t.role}
                     </p>
                   </div>

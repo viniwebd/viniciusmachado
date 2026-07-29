@@ -47,7 +47,7 @@ export function BioCards({
     <div className="grid grid-cols-2 gap-[16px]">
       <div
         ref={aboutRef ?? aboutInternalRef}
-        className="relative flex min-h-[167px] flex-col gap-[12px] rounded-[16px] border border-black/10 bg-white p-[12px] transition-colors hover:border-[#aadf3a]"
+        className="relative flex h-[167px] flex-col justify-between rounded-[16px] border border-black/10 bg-white p-[12px] transition-colors hover:border-[#aadf3a]"
       >
         <div className="flex items-start justify-between">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -64,7 +64,7 @@ export function BioCards({
         </div>
         <TextGradientScroll
           paragraphs={aboutParagraphs}
-          className="text-[13px] leading-[18px] tracking-[-0.01em] md:text-[14px] md:leading-[20px]"
+          className="text-[13px] leading-[16px] tracking-[-0.01em] md:text-[14px] md:leading-[18px]"
           dimmedClassName="text-[#706b6b]"
           boldClassName="font-medium text-black"
         />
@@ -72,9 +72,9 @@ export function BioCards({
 
       <div
         ref={locationRef ?? locationInternalRef}
-        className="relative flex min-h-[167px] flex-col overflow-hidden rounded-[16px] border border-black/10 bg-white p-[12px] transition-colors hover:border-[#aadf3a]"
+        className="relative flex h-[167px] flex-col justify-between overflow-hidden rounded-[16px] border border-black/10 bg-white p-[12px] transition-colors hover:border-[#aadf3a]"
       >
-        <div className="flex items-start justify-between">
+        <div className="relative z-10 flex items-start justify-between">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/icons/navigation.svg" alt="" width={18} height={18} />
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -88,14 +88,12 @@ export function BioCards({
 
         <div
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-[42px] -translate-x-1/2"
+          className="pointer-events-none absolute left-1/2 top-[57px] -translate-x-1/2"
         >
-          <div className="h-[136px] w-[236px] overflow-hidden">
-            <Globe size={236} className="translate-y-0" />
-          </div>
+          <Globe size={168} />
         </div>
 
-        <div className="relative z-10 mt-auto flex flex-col gap-[4px]">
+        <div className="relative z-10 flex flex-col gap-[4px]">
           <p className="text-[13px] leading-[14px] tracking-[-0.01em] text-black md:text-[14px]">
             Gravataí, Brasil
           </p>

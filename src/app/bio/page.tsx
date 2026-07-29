@@ -86,13 +86,13 @@ export default function BioPage() {
 
   return (
     <main className="min-h-screen w-full bg-white text-black">
-      <div className="mx-auto flex w-full max-w-[620px] flex-col gap-[32px] px-[24px] pt-[64px] pb-[48px] md:pt-[80px]">
+      <div className="mx-auto flex w-full max-w-[620px] flex-col gap-[64px] px-[24px] pt-[64px] pb-[64px] md:pt-[80px]">
         <BioHero />
         <BioCards aboutRef={aboutRef} locationRef={locationRef} />
         <BioLinks itemsRef={linkItemsRef} />
       </div>
 
-      <div className="mx-auto flex w-full max-w-[620px] flex-col gap-[32px] px-[24px] pb-[48px]">
+      <div className="mx-auto flex w-full max-w-[620px] flex-col gap-[64px] px-[24px] pb-[64px]">
         <BioProjectsCarousel ref={projectsRef} />
         <BioTestimonialsCarousel ref={testimonialsRef} />
       </div>
