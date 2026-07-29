@@ -11,10 +11,28 @@ const inter = Inter({
   display: "swap",
 });
 
+const SITE_URL = "https://viniciusmachado.com";
+const SITE_TITLE = "Vinicius Machado — Web Designer";
+const SITE_DESCRIPTION =
+  "Freelancer com cerca de 3 anos de experiência em web design e UI, ajudando marcas a transformar ideias em sites e produtos digitais bonitos e funcionais.";
+
 export const metadata: Metadata = {
-  title: "Vinicius Machado — Web Designer",
-  description:
-    "Freelancer com cerca de 3 anos de experiência em web design e UI, ajudando marcas a transformar ideias em sites e produtos digitais bonitos e funcionais.",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: "Vinicius Machado",
+    locale: "pt_BR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
