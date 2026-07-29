@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { NavBar } from "@/components/NavBar";
 import { SmoothScroll } from "@/components/SmoothScroll";
-import { GradualBlur } from "@/components/GradualBlur";
 import "./globals.css";
 
 const inter = Inter({
@@ -44,9 +42,7 @@ export default function RootLayout({
     <html lang="pt-BR" className={inter.variable}>
       <body className="bg-white font-sans text-black antialiased">
         <SmoothScroll />
-        <NavBar />
         {children}
-        <GradualBlur />
       </body>
     </html>
   );
