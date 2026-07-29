@@ -39,16 +39,16 @@ export function BioHero() {
         />
       </div>
 
-      <div className="flex flex-col gap-[4px]">
-        <h1 className="text-[32px] font-medium leading-[36px] tracking-[-0.045em] text-black md:text-[36px] md:leading-[40px]">
+      <div className="flex w-full flex-col gap-[4px]">
+        <h1 className="text-[40px] font-medium leading-[36px] tracking-[-0.045em] text-black">
           Vinicius Machado
         </h1>
-        <p className="text-[18px] leading-[24px] tracking-[-0.015em] text-[#706b6b] md:text-[20px]">
+        <p className="text-[20px] font-normal leading-[24px] tracking-[-0.015em] text-[#706b6b]">
           Web Designer &amp; UI Designer
         </p>
       </div>
 
-      <ul className="mt-[8px] flex items-center gap-[16px]">
+      <ul className="flex items-center gap-[16px]">
         {socials.map(({ label, href, icon }) => (
           <li key={label}>
             <a
@@ -56,7 +56,7 @@ export function BioHero() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="flex h-[40px] w-[40px] items-center justify-center rounded-full border border-black/10 transition-colors hover:border-[#aadf3a] hover:bg-black/[0.03]"
+              className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-[rgba(112,107,107,0.1)] transition-colors hover:bg-[#aadf3a]/30"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={icon} alt="" width={25} height={25} />

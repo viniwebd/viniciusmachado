@@ -39,18 +39,18 @@ export const BioTestimonialsCarousel = forwardRef<HTMLDivElement>(
   function BioTestimonialsCarousel(_, ref) {
     return (
       <section ref={ref} className="flex flex-col gap-[16px]">
-        <p className="text-[15px] font-medium leading-[18px] tracking-[-0.015em] text-black md:text-[16px]">
+        <p className="text-[20px] font-normal leading-[18px] tracking-[-0.045em] text-black">
           Depoimentos
         </p>
 
-        <DragScroll className="-mx-[24px] px-[24px]">
+        <DragScroll className="-mx-[20px] px-[20px]">
           <ul className="flex items-stretch gap-[16px]">
             {testimonials.map((t) => (
               <li
                 key={t.name}
-                className="flex w-[280px] flex-shrink-0 flex-col justify-between gap-[16px] rounded-[16px] border border-black/10 bg-white p-[12px] transition-colors hover:border-[#aadf3a]"
+                className="flex w-[280px] flex-shrink-0 flex-col gap-[16px] rounded-[10px] border border-[rgba(112,107,107,0.1)] bg-[rgba(112,107,107,0.1)] p-[12px] transition-colors hover:border-[#aadf3a]"
               >
-                <p className="text-[13px] leading-[18px] tracking-[-0.01em] text-black md:text-[14px]">
+                <p className="text-[16px] font-normal leading-[22px] tracking-[-0.015em] text-black">
                   {t.quote}
                 </p>
                 <div className="flex items-center gap-[16px]">
@@ -65,10 +65,10 @@ export const BioTestimonialsCarousel = forwardRef<HTMLDivElement>(
                     />
                   </div>
                   <div className="flex flex-col gap-[4px]">
-                    <p className="text-[15px] font-medium leading-[18px] tracking-[-0.02em] text-black md:text-[16px]">
+                    <p className="text-[16px] font-normal leading-[18px] tracking-[-0.045em] text-black">
                       {t.name}
                     </p>
-                    <p className="text-[12px] leading-[12px] tracking-[-0.01em] text-[#706b6b] md:text-[13px] md:leading-[18px]">
+                    <p className="text-[12px] font-normal leading-[12px] tracking-[-0.045em] text-[#706b6b]">
                       {t.role}
                     </p>
                   </div>

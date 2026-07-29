@@ -30,22 +30,18 @@ export default function BioPage() {
       opts: { trigger?: Element | null } = {}
     ) => {
       if (!target) return;
-      const t = gsap.fromTo(
-        target,
-        from,
-        {
-          x: 0,
-          y: 0,
-          opacity: 1,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: (opts.trigger ?? (target as Element)) as Element,
-            start: "top 90%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+      const t = gsap.fromTo(target, from, {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        duration: 0.9,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: (opts.trigger ?? (target as Element)) as Element,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      });
       tweens.push(t);
     };
 
@@ -86,22 +82,35 @@ export default function BioPage() {
 
   return (
     <main className="min-h-screen w-full bg-white text-black">
-      <div className="mx-auto flex w-full max-w-[620px] flex-col gap-[64px] px-[24px] pt-[64px] pb-[64px] md:pt-[80px]">
-        <BioHero />
-        <BioCards aboutRef={aboutRef} locationRef={locationRef} />
-        <BioLinks itemsRef={linkItemsRef} />
-      </div>
+      <div className="mx-auto flex w-full max-w-[620px] flex-col">
+        {/* Hero */}
+        <section className="px-[20px] py-[32px]">
+          <BioHero />
+        </section>
 
-      <div className="mx-auto flex w-full max-w-[620px] flex-col gap-[64px] px-[24px] pb-[64px]">
-        <BioProjectsCarousel ref={projectsRef} />
-        <BioTestimonialsCarousel ref={testimonialsRef} />
-      </div>
+        {/* Cards + Links (all in one section, gap-16 between rows) */}
+        <section className="flex flex-col gap-[16px] px-[20px] py-[32px]">
+          <BioCards aboutRef={aboutRef} locationRef={locationRef} />
+          <BioLinks itemsRef={linkItemsRef} />
+        </section>
 
-      <footer className="mx-auto w-full max-w-[620px] px-[24px] pb-[48px]">
-        <p className="text-center text-[13px] leading-[16px] tracking-[-0.01em] text-[#706b6b]">
-          © 2026 Vinicius Machado. Todos os direitos reservados.
-        </p>
-      </footer>
+        {/* Projects */}
+        <section className="px-[20px] py-[32px]">
+          <BioProjectsCarousel ref={projectsRef} />
+        </section>
+
+        {/* Testimonials */}
+        <section className="px-[20px] py-[32px]">
+          <BioTestimonialsCarousel ref={testimonialsRef} />
+        </section>
+
+        {/* Copyright */}
+        <footer className="px-[20px] py-[32px]">
+          <p className="text-center text-[12px] leading-[14px] tracking-[-0.015em] text-[#706b6b]">
+            © 2026 Vinicius Machado. Todos os direitos reservados.
+          </p>
+        </footer>
+      </div>
     </main>
   );
 }

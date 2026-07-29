@@ -47,44 +47,55 @@ export function BioCards({
     <div className="grid grid-cols-2 gap-[16px]">
       <div
         ref={aboutRef ?? aboutInternalRef}
-        className="relative flex h-[167px] flex-col justify-between rounded-[16px] border border-black/10 bg-white p-[12px] transition-colors hover:border-[#aadf3a]"
+        className="relative h-[167px] rounded-[10px] border border-[rgba(112,107,107,0.1)] bg-white transition-colors hover:border-[#aadf3a]"
       >
-        <div className="flex items-start justify-between">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/icons/user.svg" alt="" width={18} height={18} />
-          <div className="relative h-[18px] w-[18px] overflow-hidden rounded-full bg-black/5">
-            <Image
-              src="/assets/andrews-barbosa.png"
-              alt=""
-              fill
-              sizes="18px"
-              className="object-cover"
-            />
-          </div>
-        </div>
-        <TextGradientScroll
-          paragraphs={aboutParagraphs}
-          className="text-[13px] leading-[16px] tracking-[-0.01em] md:text-[14px] md:leading-[18px]"
-          dimmedClassName="text-[#706b6b]"
-          boldClassName="font-medium text-black"
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/icons/user.svg"
+          alt=""
+          width={18}
+          height={18}
+          className="absolute left-[12px] top-[12px]"
         />
+        <div className="absolute right-[12px] top-[12px] h-[18px] w-[18px] overflow-hidden rounded-full bg-black/5">
+          <Image
+            src="/assets/andrews-barbosa.png"
+            alt=""
+            fill
+            sizes="18px"
+            className="object-cover"
+          />
+        </div>
+        <div className="absolute inset-x-[12px] bottom-[12px]">
+          <TextGradientScroll
+            paragraphs={aboutParagraphs}
+            className="text-[12px] leading-[14px] tracking-[-0.045em]"
+            dimmedClassName="text-[#706b6b]"
+            boldClassName="font-medium text-black"
+          />
+        </div>
       </div>
 
       <div
         ref={locationRef ?? locationInternalRef}
-        className="relative flex h-[167px] flex-col justify-between overflow-hidden rounded-[16px] border border-black/10 bg-white p-[12px] transition-colors hover:border-[#aadf3a]"
+        className="relative h-[167px] overflow-hidden rounded-[10px] border border-[rgba(112,107,107,0.1)] bg-white transition-colors hover:border-[#aadf3a]"
       >
-        <div className="relative z-10 flex items-start justify-between">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/icons/navigation.svg" alt="" width={18} height={18} />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/icons/flag_brazil.svg"
-            alt="Brasil"
-            width={21}
-            height={21}
-          />
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/icons/navigation.svg"
+          alt=""
+          width={18}
+          height={18}
+          className="absolute left-[12px] top-[12px] z-10"
+        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/icons/flag_brazil.svg"
+          alt="Brasil"
+          width={21}
+          height={21}
+          className="absolute right-[12px] top-[11px] z-10"
+        />
 
         <div
           aria-hidden
@@ -93,12 +104,24 @@ export function BioCards({
           <Globe size={168} />
         </div>
 
-        <div className="relative z-10 flex flex-col gap-[4px]">
-          <p className="text-[13px] leading-[14px] tracking-[-0.01em] text-black md:text-[14px]">
+        {/* Glass overlay at the bottom to fade the globe behind the text */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[40px]"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%)",
+            backdropFilter: "blur(6px)",
+            WebkitBackdropFilter: "blur(6px)",
+          }}
+        />
+
+        <div className="absolute inset-x-[12px] bottom-[12px] z-10 flex flex-col gap-[4px]">
+          <p className="text-[12px] leading-[14px] tracking-[-0.015em] text-black">
             Gravataí, Brasil
           </p>
           <p
-            className="text-[13px] leading-[14px] tracking-[-0.01em] text-[#706b6b] md:text-[14px]"
+            className="text-[12px] leading-[14px] tracking-[-0.015em] text-[#706b6b]"
             suppressHydrationWarning
           >
             {time || " "}
