@@ -44,7 +44,7 @@ export const BioTestimonialsCarousel = forwardRef<HTMLDivElement>(
         </p>
 
         <DragScroll className="-mx-[20px] px-[20px]">
-          <ul className="flex items-stretch gap-[16px]">
+          <ul className="flex items-start gap-[16px]">
             {testimonials.map((t) => (
               <li
                 key={t.name}
