@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { User, Navigation } from "lucide-react";
 import { Globe } from "@/components/ui/Globe";
 import {
   TextGradientScroll,
@@ -33,28 +32,6 @@ function useLocalTime() {
   return time;
 }
 
-function BrazilFlag({ size = 21 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-    >
-      <circle cx="12" cy="12" r="12" fill="#009c3b" />
-      <path d="M12 4l8 8-8 8-8-8z" fill="#ffdf00" />
-      <circle cx="12" cy="12" r="4" fill="#002776" />
-      <path
-        d="M8.5 12.5c1.5-.5 5.5-.5 7 0"
-        stroke="#fff"
-        strokeWidth="0.6"
-        fill="none"
-      />
-    </svg>
-  );
-}
-
 export function BioCards({
   aboutRef,
   locationRef,
@@ -73,9 +50,8 @@ export function BioCards({
         className="relative flex min-h-[167px] flex-col gap-[12px] rounded-[16px] border border-black/10 bg-white p-[12px] transition-colors hover:border-[#aadf3a]"
       >
         <div className="flex items-start justify-between">
-          <div className="flex h-[18px] w-[18px] items-center justify-center text-black">
-            <User size={18} strokeWidth={1.75} />
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/icons/user.svg" alt="" width={18} height={18} />
           <div className="relative h-[18px] w-[18px] overflow-hidden rounded-full bg-black/5">
             <Image
               src="/assets/andrews-barbosa.png"
@@ -99,10 +75,15 @@ export function BioCards({
         className="relative flex min-h-[167px] flex-col overflow-hidden rounded-[16px] border border-black/10 bg-white p-[12px] transition-colors hover:border-[#aadf3a]"
       >
         <div className="flex items-start justify-between">
-          <div className="flex h-[18px] w-[18px] items-center justify-center text-black">
-            <Navigation size={18} strokeWidth={1.75} />
-          </div>
-          <BrazilFlag size={21} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/icons/navigation.svg" alt="" width={18} height={18} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/icons/flag_brazil.svg"
+            alt="Brasil"
+            width={21}
+            height={21}
+          />
         </div>
 
         <div

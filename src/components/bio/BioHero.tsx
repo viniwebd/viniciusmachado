@@ -1,33 +1,27 @@
 "use client";
 
 import Image from "next/image";
-import {
-  BehanceIcon,
-  GithubIcon,
-  LinkedInIcon,
-  PinterestIcon,
-} from "./BrandIcons";
 
 const socials = [
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/vinicius-designer",
-    Icon: LinkedInIcon,
+    icon: "/icons/linkedin.svg",
   },
   {
     label: "Behance",
     href: "https://www.behance.net/viniciusmach",
-    Icon: BehanceIcon,
+    icon: "/icons/behance.svg",
   },
   {
     label: "Github",
     href: "https://github.com/viniwebd",
-    Icon: GithubIcon,
+    icon: "/icons/github.svg",
   },
   {
     label: "Pinterest",
     href: "https://br.pinterest.com/viniciuswebdesigner/",
-    Icon: PinterestIcon,
+    icon: "/icons/pinterest.svg",
   },
 ];
 
@@ -55,16 +49,17 @@ export function BioHero() {
       </div>
 
       <ul className="mt-[8px] flex items-center gap-[16px]">
-        {socials.map(({ label, href, Icon }) => (
+        {socials.map(({ label, href, icon }) => (
           <li key={label}>
             <a
               href={href}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="flex h-[40px] w-[40px] items-center justify-center rounded-full border border-black/10 text-black transition-colors hover:border-[#aadf3a] hover:bg-black/[0.03]"
+              className="flex h-[40px] w-[40px] items-center justify-center rounded-full border border-black/10 transition-colors hover:border-[#aadf3a] hover:bg-black/[0.03]"
             >
-              <Icon size={20} />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={icon} alt="" width={25} height={25} />
             </a>
           </li>
         ))}
