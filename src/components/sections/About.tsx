@@ -1,42 +1,43 @@
-import { ButtonDS } from "@/components/ui/ButtonDS";
-import { SocialLinks } from "@/components/SocialLinks";
+import { WhisperText } from "@/components/ui/WhisperText";
+import {
+  TextGradientScroll,
+  type Paragraph,
+} from "@/components/ui/TextGradientScroll";
+
+const aboutParagraphs: Paragraph[] = [
+  [
+    { text: "Freelancer com " },
+    { text: "cerca de 3 anos", bold: true },
+    {
+      text: " de experiência em web design e UI, ajudando marcas a transformar ideias em ",
+    },
+    { text: "sites e produtos digitais", bold: true },
+    { text: " bonitos e funcionais." },
+  ],
+  [
+    {
+      text: "Trabalho lado a lado com o time, do wireframe ao deploy, para entregar interfaces que não só apresentam bem — mas que carregam rápido, convertem e são fáceis de manter no dia a dia.",
+    },
+  ],
+  [
+    {
+      text: "Foco em WordPress, Figma e front-end moderno, sempre pensando em performance, acessibilidade e no impacto real que o projeto vai ter no negócio do cliente.",
+    },
+  ],
+];
 
 export function About() {
   return (
-    <section id="sobre" className="bg-[#f0f0ee] py-[60px] md:py-[80px] lg:py-[96px]">
-      <div className="mx-auto max-w-[1440px] px-[24px] md:px-[40px] lg:px-[80px]">
-        <div className="flex flex-col lg:flex-row items-start gap-[40px] lg:gap-[80px] lg:justify-center">
-          {/* Foto */}
-          <div className="order-2 lg:order-1 w-full lg:w-[420px] h-[280px] md:h-[360px] lg:h-[447px] flex-shrink-0 rounded-[16px] bg-[#ededed] flex items-center justify-center">
-            <span className="text-[#808080] text-[14px]">Sua foto aqui</span>
-          </div>
+    <section id="sobre" className="w-full bg-white">
+      <div className="container-page flex flex-col gap-[32px] py-[64px] md:flex-row md:items-start md:justify-between md:gap-[48px] md:py-[80px] lg:py-[96px]">
+        <h2 className="text-[52px] font-medium leading-[52px] tracking-[-0.045em] text-black lg:leading-[62px]">
+          <WhisperText text="Sobre mim" />
+        </h2>
 
-          {/* Conteúdo */}
-          <div className="order-1 lg:order-2 w-full lg:w-[557px] flex-shrink-0">
-            <h2
-              className="text-[28px] md:text-[32px] lg:text-[38px] font-bold leading-[1.15] text-[#1a1a1a] mb-[20px] lg:mb-[24px]"
-              style={{ fontVariationSettings: '"opsz" 14' }}
-            >
-              Sobre
-            </h2>
-            <p
-              className="text-[16px] lg:text-[18px] leading-[1.6] text-[#1a1a1a] mb-[24px]"
-              style={{ fontVariationSettings: '"opsz" 14' }}
-            >
-              Sou web designer especializado em WordPress com foco em criar
-              experiências digitais que equilibram estética e performance.
-              Trabalho desde a concepção visual até a entrega final, garantindo
-              que cada projeto comunique com clareza e converta visitantes em
-              clientes. Atualmente estudando programação e inglês para expandir
-              minha atuação para o mercado internacional, trabalhando como
-              contractor e freelancer.
-            </p>
-            <SocialLinks />
-            <div className="mt-[24px]">
-              <ButtonDS variant="primary" size="md" href="/Curriculo-Vinicius-Machado-WebDesginer.pdf">Download CV</ButtonDS>
-            </div>
-          </div>
-        </div>
+        <TextGradientScroll
+          paragraphs={aboutParagraphs}
+          className="flex max-w-[758px] flex-col gap-[24px] text-[18px] leading-[1.5] tracking-[-0.015em] lg:text-[20px] lg:leading-[28px]"
+        />
       </div>
     </section>
   );

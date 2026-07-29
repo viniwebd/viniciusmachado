@@ -1,48 +1,83 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
 
 const navItems = [
-  { label: "Home", href: "/#home" },
-  { label: "Portfólio", href: "/#portfolio" },
-  { label: "Sobre", href: "/#sobre" },
+  { label: "Projetos", href: "/#projetos" },
+  {
+    label: "Linkedin",
+    href: "https://www.linkedin.com/in/viniciusmachado/",
+    external: true,
+  },
   { label: "Contato", href: "/#contato" },
 ];
 
-export function NavBar() {
-  const [visible, setVisible] = useState(true);
-  const lastY = useRef(0);
+function useLocalTime() {
+  const [time, setTime] = useState<string>("");
 
   useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      setVisible(y < lastY.current || y < 80);
-      lastY.current = y;
+    const tick = () => {
+      const now = new Date();
+      const hours = now.getHours() % 12 || 12;
+      const minutes = now.getMinutes().toString().padStart(2, "0");
+      const suffix = now.getHours() >= 12 ? "PM" : "AM";
+      setTime(`${hours}:${minutes} ${suffix}`);
     };
+    tick();
+    const id = window.setInterval(tick, 30_000);
+    return () => window.clearInterval(id);
+  }, []);
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+  return time;
+}
+
+export function NavBar() {
+  const navRef = useRef<HTMLElement>(null);
+  const time = useLocalTime();
+
+  useEffect(() => {
+    if (!navRef.current) return;
+    gsap.fromTo(
+      navRef.current,
+      { y: -30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", delay: 0.1 }
+    );
   }, []);
 
   return (
     <nav
-      className={`fixed bottom-[40px] md:bottom-[60px] left-0 right-0 z-50 flex justify-center transition-all duration-300 ${
-        visible
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-3 pointer-events-none"
-      }`}
+      ref={navRef}
+      className="fixed inset-x-0 top-0 z-50 w-full bg-white/70 backdrop-blur-xl"
+      style={{ opacity: 0 }}
     >
-      <div className="flex items-center gap-[12px] md:gap-[24px] rounded-full border border-[rgba(240,240,238,0.42)] bg-[rgba(26,26,26,0.85)] px-[16px] md:px-[32px] py-[8px] backdrop-blur-md">
-        {navItems.map((item) => (
-          <a
-            key={item.label}
-            href={item.href}
-            className="rounded-full border border-transparent px-[10px] md:px-[12px] py-[2px] text-[12px] md:text-[14px] font-medium text-[rgba(240,240,238,0.6)] transition-all duration-200 hover:border-[rgba(240,240,238,0.42)] hover:bg-[rgba(240,240,238,0.12)] hover:text-[#f0f0ee] active:border-[rgba(240,240,238,0.42)] active:bg-[rgba(240,240,238,0.12)] active:text-[#f0f0ee]"
-            style={{ fontVariationSettings: '"opsz" 14' }}
-          >
-            {item.label}
-          </a>
-        ))}
+      <div className="container-page flex items-center justify-between py-[16px]">
+        <a
+          href="/#home"
+          className="text-[18px] font-normal leading-[20px] tracking-[-0.045em] text-black"
+        >
+          Vinicius Machado
+        </a>
+
+        <div className="hidden items-center gap-[24px] text-[16px] leading-[20px] tracking-[-0.045em] text-black md:flex">
+          {navItems.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              {...(item.external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              className="transition-opacity hover:opacity-60"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-[16px] text-right text-[16px] leading-[20px] tracking-[-0.045em] text-black">
+          <span suppressHydrationWarning>{time || " "}</span>
+          <span>Gravataí, RS</span>
+        </div>
       </div>
     </nav>
   );

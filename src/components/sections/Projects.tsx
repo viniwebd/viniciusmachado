@@ -1,9 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { projects, type ProjectData } from "@/data/projects";
 import { ProjectModal } from "@/components/ProjectModal";
+import { WhisperText } from "@/components/ui/WhisperText";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 function ProjectCard({
   project,
@@ -12,54 +19,63 @@ function ProjectCard({
   project: ProjectData;
   onClick: () => void;
 }) {
+  const imageRef = useRef<HTMLDivElement>(null);
+  const subtitle = project.tags.slice(0, 2).join(" • ");
+
+  useEffect(() => {
+    const el = imageRef.current;
+    if (!el) return;
+
+    const anim = gsap.fromTo(
+      el,
+      { scale: 0.82 },
+      {
+        scale: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: el,
+          start: "top bottom",
+          end: "top 40%",
+          scrub: 0.6,
+        },
+      }
+    );
+
+    return () => {
+      anim.scrollTrigger?.kill();
+      anim.kill();
+    };
+  }, []);
+
   return (
     <button
       onClick={onClick}
-      className="relative flex flex-col justify-end gap-[10px] overflow-hidden rounded-[16px] p-[20px] h-[400px] md:h-[460px] lg:h-[520px] group text-left w-full cursor-pointer"
+      className="group flex w-full flex-col items-start gap-[16px] text-left"
     >
-      {/* Imagem de fundo */}
-      <Image
-        src={project.image}
-        alt={project.title}
-        fill
-        className="object-cover transition-transform duration-500 group-hover:scale-105"
-      />
-
-      {/* Gradient overlay */}
-      <div className="absolute inset-x-0 bottom-0 h-[280px] bg-gradient-to-t from-[#1a1a1a] to-transparent" />
-
-      {/* Título */}
-      <p
-        className="relative text-[28px] font-bold leading-[1.2] text-[#f0f0ee]"
-        style={{ fontVariationSettings: '"opsz" 14' }}
+      <div
+        ref={imageRef}
+        className="relative aspect-[628/640] w-full overflow-hidden rounded-[16px] bg-black/5 will-change-transform"
       >
-        {project.title}
-      </p>
-
-      {/* Tags */}
-      <div className="relative flex flex-wrap gap-[8px]">
-        {project.tags.map((tag) => (
-          <span
-            key={tag}
-            className="bg-[rgba(240,240,238,0.12)] border-[0.5px] border-[rgba(240,240,238,0.42)] rounded-full px-[12px] py-[4px] text-[12px] font-medium leading-[1.4] text-[#f0f0ee]"
-            style={{ fontVariationSettings: '"opsz" 14' }}
-          >
-            {tag}
-          </span>
-        ))}
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          sizes="(min-width: 1024px) 628px, (min-width: 768px) 50vw, 100vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-b from-transparent from-[55%] to-black"
+        />
       </div>
 
-      {/* Ver case */}
-      <div className="relative flex items-center gap-[4px]">
-        <span
-          className="text-[14px] leading-[1.6] text-[#f0f0ee]"
-          style={{ fontVariationSettings: '"opsz" 14' }}
-        >
-          Ver case
-        </span>
-        <div className="w-[22px] h-[22px] flex-shrink-0">
-          <img src="/assets/icon-arrow-case.svg" alt="" className="w-full h-full" />
-        </div>
+      <div className="flex flex-col gap-[4px]">
+        <p className="text-[22px] font-medium leading-[22px] tracking-[-0.045em] text-black">
+          {project.title}
+        </p>
+        <p className="text-[16px] font-medium leading-[18px] tracking-[-0.045em] text-[#706b6b]">
+          {subtitle || "Web Design • UI Design"}
+        </p>
       </div>
     </button>
   );
@@ -70,15 +86,13 @@ export function Projects() {
 
   return (
     <>
-      <section id="portfolio" className="bg-[#f0f0ee] py-[60px] md:py-[80px] lg:py-[96px]">
-        <div className="mx-auto max-w-[1440px] px-[24px] md:px-[40px] lg:px-[80px]">
-          <h2
-            className="text-[28px] md:text-[32px] lg:text-[38px] font-bold leading-[1.15] text-[#1a1a1a] text-center mb-[40px] md:mb-[56px] lg:mb-[76px]"
-            style={{ fontVariationSettings: '"opsz" 14' }}
-          >
-            Portfólio
+      <section id="projetos" className="w-full bg-white">
+        <div className="container-page flex flex-col gap-[48px] py-[64px] md:py-[80px] lg:py-[96px]">
+          <h2 className="text-[52px] font-medium leading-[52px] tracking-[-0.045em] text-black lg:leading-[62px]">
+            <WhisperText text="Projetos" />
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[16px] md:gap-[20px] lg:gap-[24px]">
+
+          <div className="grid grid-cols-1 gap-x-[24px] gap-y-[48px] md:grid-cols-2">
             {projects.map((project) => (
               <ProjectCard
                 key={project.id}

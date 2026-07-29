@@ -1,76 +1,108 @@
-import { Badge } from "@/components/ui/Badge";
+"use client";
+
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { WhisperText } from "@/components/ui/WhisperText";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 type Course = {
+  title: string;
   provider: string;
   description: string;
-  year: string;
-  status: "Concluído" | "Em andamento";
 };
 
 const courses: Course[] = [
   {
-    provider: "Figmais - Thiago Medeiros",
+    title: "UX Light",
+    provider: "Design Circuit",
     description:
-      "Princípios do Design, Figma Básico ao Avançado (Auto Layout, Componentes, Prototipação), Landing Page no Figma, WordPress",
-    year: "2026",
-    status: "Em andamento",
+      "Curso introdutório em UX/UI Design abordando pesquisa com usuários, usabilidade, design de interfaces e fundamentos do processo de design de produtos digitais.",
   },
   {
-    provider: "Formação Webp - Othon Ciparoni",
+    title: "Figmais",
+    provider: "Thiago Medeiros",
     description:
-      "UI Design, WordPress + Elementor, Sites Dinâmicos com JetEngine, Figma, Infraestrutura, cPanel, Cloudflare, HTML/CSS, Performance",
-    year: "2025",
-    status: "Concluído",
+      "Princípios do Design, Figma Básico ao Avançado (Auto Layout, Componentes, Prototipação), Landing Page no Figma, WordPress.",
+  },
+  {
+    title: "Formação WebP",
+    provider: "Othon Ciparoni",
+    description:
+      "UI Design, WordPress + Elementor, Sites Dinâmicos com JetEngine, Figma, Infraestrutura, cPanel, Cloudflare, HTML/CSS, Performance.",
   },
 ];
 
 export function Courses() {
+  const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
+
+  useEffect(() => {
+    const animations = itemRefs.current
+      .filter((el): el is HTMLLIElement => el !== null)
+      .map((el) =>
+        gsap.fromTo(
+          el,
+          { x: 60, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        )
+      );
+    return () => {
+      animations.forEach((anim) => {
+        anim.scrollTrigger?.kill();
+        anim.kill();
+      });
+    };
+  }, []);
+
   return (
-    <section className="bg-[#f0f0ee] py-[60px] md:py-[80px] lg:py-[96px]">
-      <div className="mx-auto max-w-[1440px] px-[24px] md:px-[40px] lg:px-[80px]">
-        <h2
-          className="text-[28px] md:text-[32px] lg:text-[38px] font-bold leading-[1.15] text-[#1a1a1a] mb-[40px] md:mb-[56px] lg:mb-[76px]"
-          style={{ fontVariationSettings: '"opsz" 14' }}
-        >
-          Cursos &amp; Certificações
+    <section id="certificacoes" className="w-full bg-white">
+      <div className="container-page flex flex-col gap-[32px] py-[64px] md:flex-row md:items-start md:justify-between md:gap-[48px] md:py-[80px] lg:py-[96px]">
+        <h2 className="text-[52px] font-medium leading-[52px] tracking-[-0.045em] text-black lg:leading-[62px]">
+          <WhisperText text="Certificações" />
         </h2>
 
-        <div>
+        <ul className="flex w-full max-w-[758px] flex-col gap-[32px]">
           {courses.map((course, i) => (
-            <div key={course.provider}>
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-[12px] md:gap-0 py-[24px]">
-                <div className="md:pr-[40px]">
-                  <p
-                    className="text-[18px] md:text-[20px] font-medium leading-[1.3] text-[#1a1a1a] mb-[4px]"
-                    style={{ fontVariationSettings: '"opsz" 14' }}
-                  >
+            <li
+              key={course.title}
+              ref={(el) => {
+                itemRefs.current[i] = el;
+              }}
+              className="flex flex-col gap-[32px]"
+              style={{ opacity: 0 }}
+            >
+              <div className="flex flex-col gap-[16px]">
+                <div className="flex flex-col gap-[4px]">
+                  <p className="text-[24px] font-medium leading-[1.2] tracking-[-0.045em] text-black md:text-[28px] lg:text-[32px] lg:leading-[42px]">
+                    {course.title}
+                  </p>
+                  <p className="text-[18px] leading-[1.4] tracking-[-0.015em] text-[#706b6b] lg:text-[20px] lg:leading-[28px]">
                     {course.provider}
                   </p>
-                  <p
-                    className="text-[14px] leading-[1.6] text-[rgba(26,26,26,0.6)]"
-                    style={{ fontVariationSettings: '"opsz" 14' }}
-                  >
-                    {course.description}
-                  </p>
                 </div>
-                <div className="flex items-center gap-[12px] md:gap-[16px] flex-shrink-0">
-                  <span
-                    className="text-[13px] md:text-[14px] leading-[1.6] text-[rgba(26,26,26,0.6)]"
-                    style={{ fontVariationSettings: '"opsz" 14' }}
-                  >
-                    {course.year}
-                  </span>
-                  <Badge variant="green" size="sm">
-                    {course.status}
-                  </Badge>
-                </div>
+                <p className="text-[15px] leading-[1.4] tracking-[-0.015em] text-[#706b6b] lg:text-[16px] lg:leading-[20px]">
+                  {course.description}
+                </p>
               </div>
               {i < courses.length - 1 && (
-                <div className="h-px bg-[rgba(26,26,26,0.12)]" />
+                <div className="h-px w-full bg-black/10" />
               )}
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
