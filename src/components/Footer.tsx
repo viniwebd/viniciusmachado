@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Copy } from "lucide-react";
-import { WhisperText } from "@/components/ui/WhisperText";
 import { HoverRoll } from "@/components/ui/HoverRoll";
 
 const navLinks = [
@@ -223,10 +222,11 @@ function WhatsAppPhone() {
   );
 }
 
-export function Footer() {
+export function Footer({ fixed = true }: { fixed?: boolean } = {}) {
   const footerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    if (!fixed) return;
     const el = footerRef.current;
     if (!el) return;
     const update = () => {
@@ -239,19 +239,23 @@ export function Footer() {
     const obs = new ResizeObserver(update);
     obs.observe(el);
     return () => obs.disconnect();
-  }, []);
+  }, [fixed]);
 
   return (
     <footer
       ref={footerRef}
       id="contato"
-      className="fixed inset-x-0 bottom-0 z-0 w-full bg-black text-white"
+      className={
+        fixed
+          ? "fixed inset-x-0 bottom-0 z-0 w-full bg-black text-white"
+          : "relative w-full bg-black text-white"
+      }
     >
       <div className="container-page flex flex-col gap-[32px] py-[64px] md:py-[80px] lg:gap-[48px] lg:py-[96px]">
         <div className="flex flex-col gap-[32px] md:flex-row md:items-start md:justify-between md:gap-[48px] lg:gap-[80px]">
           <div className="flex flex-col items-start gap-[32px]">
             <h2 className="max-w-[298px] text-[52px] font-medium leading-[52px] tracking-[-0.045em] text-white lg:text-[62px] lg:leading-[64px]">
-              <WhisperText text="Vamos conversar" />
+              Vamos conversar
             </h2>
             <a
               href="/Vinicius_Machado_Web_Desginer_CV.pdf"
