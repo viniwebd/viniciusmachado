@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState, type RefObject } from "react";
-import { ArrowDownRight, ArrowUpRight, Copy } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, Copy } from "lucide-react";
 import { WhisperText } from "@/components/ui/WhisperText";
+import { HoverRoll } from "@/components/ui/HoverRoll";
 
 const navLinks = [
   { label: "Home", href: "/#home" },
@@ -17,15 +19,7 @@ const socialLinks = [
   },
   { label: "Instagram", href: "https://www.instagram.com/vini.webd/" },
   { label: "Behance", href: "https://www.behance.net/viniciusmach" },
-  {
-    label: "Pinterest",
-    href: "https://br.pinterest.com/viniciuswebdesigner/",
-  },
   { label: "Github", href: "https://github.com/viniwebd" },
-  {
-    label: "Upwork",
-    href: "https://www.upwork.com/freelancers/~01225aab22889c4b30?mp_source=share",
-  },
 ];
 
 const EMAIL = "contato@viniciusmachado.com";
@@ -186,7 +180,7 @@ function CopyEmail() {
           void e;
         }}
         onClick={handleClick}
-        className="cursor-pointer text-left text-[16px] font-normal leading-[19px] tracking-[-0.015em] text-[#c3c0c0] transition-colors hover:text-white"
+        className="cursor-pointer text-left text-[14px] font-normal leading-[19px] tracking-[-0.015em] text-[#c3c0c0] transition-colors hover:text-white min-[425px]:text-[16px]"
       >
         {EMAIL}
       </button>
@@ -214,7 +208,7 @@ function WhatsAppPhone() {
         target="_blank"
         rel="noopener noreferrer"
         {...tooltip.handlers}
-        className="cursor-pointer text-left text-[16px] font-normal leading-[19px] tracking-[-0.015em] text-[#c3c0c0] transition-colors hover:text-white"
+        className="cursor-pointer text-left text-[14px] font-normal leading-[19px] tracking-[-0.015em] text-[#c3c0c0] transition-colors hover:text-white min-[425px]:text-[16px]"
       >
         {PHONE_DISPLAY}
       </a>
@@ -254,34 +248,30 @@ export function Footer() {
       className="fixed inset-x-0 bottom-0 z-0 w-full bg-black text-white"
     >
       <div className="container-page flex flex-col gap-[32px] py-[64px] md:py-[80px] lg:gap-[48px] lg:py-[96px]">
-        <div className="flex flex-col gap-[32px] lg:flex-row lg:items-start lg:justify-between lg:gap-[80px]">
-          <div className="flex flex-col items-start gap-[24px] lg:gap-[48px]">
+        <div className="flex flex-col gap-[32px] md:flex-row md:items-start md:justify-between md:gap-[48px] lg:gap-[80px]">
+          <div className="flex flex-col items-start gap-[32px]">
             <h2 className="max-w-[298px] text-[52px] font-medium leading-[52px] tracking-[-0.045em] text-white lg:text-[62px] lg:leading-[64px]">
               <WhisperText text="Vamos conversar" />
             </h2>
             <a
-              href="/Curriculo-Vinicius-Machado-WebDesginer.pdf"
+              href="/Vinicius_Machado_Web_Desginer_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-[8px] rounded-[16px] bg-[#aadf3a] px-[24px] py-[16px] text-[16px] font-medium leading-none tracking-[-0.045em] text-black transition-transform hover:-translate-y-[2px] lg:text-[18px]"
+              className="group inline-flex items-center gap-[8px] rounded-[16px] bg-[#aadf3a] px-[24px] py-[16px] text-[14px] font-medium leading-none tracking-[-0.045em] text-black min-[425px]:text-[16px] lg:text-[18px]"
             >
-              Download CV
-              <ArrowDownRight
-                className="h-[22px] w-[22px] lg:h-[24px] lg:w-[24px]"
-                strokeWidth={1.75}
-              />
+              <HoverRoll text="Download CV" />
             </a>
           </div>
 
-          <div className="flex items-start justify-between lg:justify-start lg:gap-[80px]">
+          <div className="flex items-start justify-between md:justify-start md:gap-[48px] lg:gap-[80px]">
             <ul className="flex flex-col gap-[16px]">
               {navLinks.map((link) => (
                 <li key={link.label} className="flex h-[24px] items-center">
                   <a
                     href={link.href}
-                    className="text-[16px] font-medium leading-[16px] tracking-[-0.045em] text-white transition-opacity hover:opacity-70"
+                    className="group inline-block text-[14px] font-medium leading-[16px] tracking-[-0.045em] text-white min-[425px]:text-[16px]"
                   >
-                    {link.label}
+                    <HoverRoll text={link.label} />
                   </a>
                 </li>
               ))}
@@ -294,11 +284,11 @@ export function Footer() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between text-[16px] font-medium leading-[16px] tracking-[-0.045em] text-white transition-opacity hover:opacity-70"
+                    className="group flex items-center justify-between text-[14px] font-medium leading-[16px] tracking-[-0.045em] text-white min-[425px]:text-[16px]"
                   >
-                    <span>{link.label}</span>
+                    <HoverRoll text={link.label} />
                     <ArrowUpRight
-                      className="h-[22px] w-[24px] lg:h-[24px]"
+                      className="h-[22px] w-[24px] transition-transform duration-300 group-hover:rotate-45 lg:h-[24px]"
                       strokeWidth={1.75}
                     />
                   </a>
@@ -308,23 +298,23 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-[32px] lg:flex-row lg:flex-wrap lg:gap-[48px]">
+        <div className="flex flex-col gap-[32px] md:flex-row md:flex-wrap md:gap-[48px]">
           <div className="flex flex-col gap-[4px]">
-            <p className="text-[16px] font-medium leading-[19px] tracking-[-0.015em] text-white">
+            <p className="text-[14px] font-medium leading-[19px] tracking-[-0.015em] text-white min-[425px]:text-[16px]">
               E-mail
             </p>
             <CopyEmail />
           </div>
           <div className="flex flex-col gap-[4px]">
-            <p className="text-[16px] font-medium leading-[19px] tracking-[-0.015em] text-white">
+            <p className="text-[14px] font-medium leading-[19px] tracking-[-0.015em] text-white min-[425px]:text-[16px]">
               Endereço
             </p>
-            <p className="text-[16px] font-normal leading-[19px] tracking-[-0.015em] text-[#c3c0c0]">
+            <p className="text-[14px] font-normal leading-[19px] tracking-[-0.015em] text-[#c3c0c0] min-[425px]:text-[16px]">
               Gravataí, RS
             </p>
           </div>
           <div className="flex flex-col gap-[4px]">
-            <p className="text-[16px] font-medium leading-[19px] tracking-[-0.015em] text-white">
+            <p className="text-[14px] font-medium leading-[19px] tracking-[-0.015em] text-white min-[425px]:text-[16px]">
               Telefone
             </p>
             <WhatsAppPhone />
@@ -333,9 +323,22 @@ export function Footer() {
 
         <div className="h-px w-full bg-white" />
 
-        <p className="text-right text-[14px] leading-none tracking-[-0.015em] text-[#c3c0c0]">
-          © 2026 Vinicius Machado. Todos os direitos reservados.
-        </p>
+        <div className="flex items-center justify-between gap-[16px]">
+          <p className="text-left text-[14px] leading-none tracking-[-0.015em] text-[#c3c0c0]">
+            © 2026 Vinicius Machado. Todos os direitos reservados.
+          </p>
+
+          <Link
+            href="/#home"
+            className="group inline-flex items-center gap-[8px] text-[14px] leading-none tracking-[-0.015em] text-[#c3c0c0]"
+          >
+            <HoverRoll text="Voltar para o topo" />
+            <ArrowUpRight
+              className="h-[14px] w-[14px] -rotate-45"
+              strokeWidth={1.75}
+            />
+          </Link>
+        </div>
       </div>
     </footer>
   );

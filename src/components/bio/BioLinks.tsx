@@ -37,8 +37,8 @@ const items: LinkItem[] = [
   {
     icon: "/icons/file.svg",
     title: "Download CV",
-    subtitle: "cv_vinicius_machado_webdesigner.pdf",
-    href: "/Curriculo-Vinicius-Machado-WebDesginer.pdf",
+    subtitle: "Vinicius_Machado_Web_Desginer_CV.pdf",
+    href: "/Vinicius_Machado_Web_Desginer_CV.pdf",
     action: "download",
   },
 ];

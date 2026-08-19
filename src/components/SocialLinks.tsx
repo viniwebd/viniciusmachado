@@ -12,7 +12,7 @@ const links = [
   {
     name: "LinkedIn",
     icon: "/assets/icon-linkedin.svg",
-    href: "https://www.linkedin.com/in/vinicius-webdesigner/",
+    href: "https://www.linkedin.com/in/vinicius-designer",
   },
   {
     name: "GitHub",

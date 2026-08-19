@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -10,7 +10,9 @@ type Testimonial = {
   quote: string;
   name: string;
   role: string;
+  company: string;
   avatar: string;
+  companyUrl?: string;
 };
 
 const testimonials: Testimonial[] = [
@@ -18,36 +20,39 @@ const testimonials: Testimonial[] = [
     quote:
       "O Vinicius realizou um excelente trabalho tanto produzindo como otimizando as Landing Pages do projeto. Em diversas páginas ele melhorou muito a performance e taxa de conversão. Parabéns pelo excelente trabalho!",
     name: "Andrews Barbosa",
-    role: "Fundador Grupo Anbar",
+    role: "Fundador",
+    company: "Grupo Anbar",
     avatar: "/assets/andrews-barbosa.png",
+    companyUrl: "https://grupoanbar.com.br/",
   },
   {
     quote:
       "Vinicius é um excelente profissional, uma pessoa que se pode confiar de olhos fechados quando o assunto é velocidade e excelência. Suas páginas aumentaram minhas conversões. Sou extremamente grato pelo trabalho e dedicação com a minha empresa, ficamos felizes de ter alguém como você na equipe podendo contar quando for preciso.",
     name: "Kauã",
-    role: "Sócio Grupo Aura",
+    role: "Sócio",
+    company: "Grupo Aura",
     avatar: "/assets/kaua.png",
   },
   {
     quote:
       "Contratei o Vinicius para o desenvolvimento de dois sites, e foi uma grande surpresa para mim ver o resultado final dos dois! O Vinicius me atendeu de forma profissional, cumpriu as datas de entrega definidas e manteve comunicação constante. Com certeza recomendo o seu trabalho.",
     name: "Bruna Silva",
-    role: "Fundadora Bio Connect Marketing",
+    role: "Fundadora",
+    company: "Bio Connect Marketing",
     avatar: "/assets/bruna-silva.png",
+    companyUrl: "https://bioconnectamt.com/",
   },
 ];
-
-function splitWithSpaces(text: string) {
-  return text.split(/(\s+)/);
-}
 
 export function Testimonials() {
   const [index, setIndex] = useState(0);
   const [inView, setInView] = useState(false);
   const [maxQuoteHeight, setMaxQuoteHeight] = useState(0);
+  const [maxRoleHeight, setMaxRoleHeight] = useState(0);
 
   const sectionRef = useRef<HTMLElement>(null);
   const measureRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const roleMeasureRefs = useRef<(HTMLParagraphElement | null)[]>([]);
   const quoteRef = useRef<HTMLParagraphElement>(null);
   const authorRef = useRef<HTMLDivElement>(null);
 
@@ -75,12 +80,19 @@ export function Testimonials() {
       const heights = measureRefs.current
         .filter((el): el is HTMLParagraphElement => el !== null)
         .map((el) => el.offsetHeight);
-      if (heights.length === 0) return;
-      setMaxQuoteHeight(Math.max(...heights));
+      if (heights.length > 0) setMaxQuoteHeight(Math.max(...heights));
+
+      const roleHeights = roleMeasureRefs.current
+        .filter((el): el is HTMLParagraphElement => el !== null)
+        .map((el) => el.offsetHeight);
+      if (roleHeights.length > 0) setMaxRoleHeight(Math.max(...roleHeights));
     };
     measure();
     const observer = new ResizeObserver(measure);
     measureRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+    roleMeasureRefs.current.forEach((el) => {
       if (el) observer.observe(el);
     });
     window.addEventListener("resize", measure);
@@ -92,27 +104,10 @@ export function Testimonials() {
 
   useEffect(() => {
     if (!inView) return;
-    const quoteEl = quoteRef.current;
     const authorEl = authorRef.current;
-    if (!quoteEl && !authorEl) return;
+    if (!authorEl) return;
 
-    const words = quoteEl?.querySelectorAll("[data-word]") ?? [];
     const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
-
-    if (words.length) {
-      tl.fromTo(
-        words,
-        { xPercent: 30, opacity: 0 },
-        {
-          xPercent: 0,
-          opacity: 1,
-          duration: 0.45,
-          stagger: 0.012,
-          force3D: false,
-        },
-        0
-      );
-    }
 
     if (authorEl) {
       tl.fromTo(
@@ -131,8 +126,6 @@ export function Testimonials() {
   const prev = () => setIndex((i) => (i - 1 + total) % total);
   const next = () => setIndex((i) => (i + 1) % total);
 
-  const chunks = splitWithSpaces(current.quote);
-
   return (
     <section
       id="feedbacks"
@@ -140,12 +133,12 @@ export function Testimonials() {
       className="w-full bg-white"
       style={{ contain: "layout paint" }}
     >
-      <div className="container-page flex flex-col gap-[32px] py-[64px] md:flex-row md:items-start md:justify-between md:gap-[48px] md:py-[80px] lg:py-[96px]">
-        <h2 className="text-[52px] font-medium leading-[52px] tracking-[-0.045em] text-black lg:leading-[62px]">
+      <div className="container-page grid grid-cols-1 gap-[32px] py-[64px] md:py-[80px] lg:grid-cols-2 lg:items-start lg:gap-[24px] lg:py-[96px]">
+        <h2 className="text-[32px] font-medium leading-[36px] tracking-[-0.045em] text-black lg:text-[44px] lg:leading-[48px] xl:text-[52px] xl:leading-[62px]">
           <WhisperText text="Feedbacks" />
         </h2>
 
-        <div className="relative flex w-full max-w-[758px] flex-col gap-[48px]">
+        <div className="relative flex w-full flex-col gap-[48px]">
           <div
             aria-hidden
             className="pointer-events-none invisible absolute inset-x-0 top-0 -z-10 flex flex-col"
@@ -156,9 +149,20 @@ export function Testimonials() {
                 ref={(el) => {
                   measureRefs.current[i] = el;
                 }}
-                className="text-[18px] leading-[1.5] tracking-[-0.015em] lg:text-[22px] lg:leading-[32px]"
+                className="text-[18px] leading-[1.5] tracking-[-0.015em] xl:text-[22px] xl:leading-[32px]"
               >
                 {t.quote}
+              </p>
+            ))}
+            {testimonials.map((t, i) => (
+              <p
+                key={i}
+                ref={(el) => {
+                  roleMeasureRefs.current[i] = el;
+                }}
+                className="text-[16px] leading-[20px] tracking-[-0.045em]"
+              >
+                {t.role} {t.company}
               </p>
             ))}
           </div>
@@ -167,29 +171,14 @@ export function Testimonials() {
             <p
               key={`quote-${index}`}
               ref={quoteRef}
-              className="text-[18px] leading-[1.5] tracking-[-0.015em] text-black lg:text-[22px] lg:leading-[32px]"
+              className="text-[18px] leading-[1.5] tracking-[-0.015em] text-black xl:text-[22px] xl:leading-[32px]"
               style={{ minHeight: maxQuoteHeight || undefined }}
             >
-              {chunks.map((chunk, i) => {
-                if (chunk === "") return null;
-                if (chunk.trim() === "") {
-                  return <Fragment key={i}>{chunk}</Fragment>;
-                }
-                return (
-                  <span
-                    key={i}
-                    data-word
-                    className="inline-block"
-                    style={{ opacity: 0 }}
-                  >
-                    {chunk}
-                  </span>
-                );
-              })}
+              {current.quote}
             </p>
           )}
 
-          <div className="flex items-end justify-between gap-[24px]">
+          <div className="flex flex-col items-start gap-[16px] min-[425px]:flex-row min-[425px]:items-end min-[425px]:justify-between min-[425px]:gap-[24px]">
             {inView && (
               <div
                 key={`author-${index}`}
@@ -235,8 +224,23 @@ export function Testimonials() {
                   <p className="text-[18px] leading-[20px] tracking-[-0.045em] text-black">
                     {current.name}
                   </p>
-                  <p className="text-[16px] leading-[20px] tracking-[-0.045em] text-[#706b6b]">
-                    {current.role}
+                  <p
+                    className="text-[16px] leading-[20px] tracking-[-0.045em] text-[#706b6b]"
+                    style={{ minHeight: maxRoleHeight || undefined }}
+                  >
+                    {current.role}{" "}
+                    {current.companyUrl ? (
+                      <a
+                        href={current.companyUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#706b6b] underline underline-offset-2 transition-colors hover:text-black"
+                      >
+                        {current.company}
+                      </a>
+                    ) : (
+                      current.company
+                    )}
                   </p>
                 </div>
               </div>
@@ -247,14 +251,14 @@ export function Testimonials() {
                 <button
                   onClick={prev}
                   aria-label="Depoimento anterior"
-                  className="flex h-[48px] w-[48px] items-center justify-center rounded-full text-black transition-colors hover:bg-[#aadf3a]"
+                  className="flex h-[48px] w-[48px] cursor-pointer items-center justify-center rounded-full border border-black/10 text-black transition-colors hover:bg-[#aadf3a]"
                 >
                   <ChevronLeft size={32} strokeWidth={1.75} />
                 </button>
                 <button
                   onClick={next}
                   aria-label="Próximo depoimento"
-                  className="flex h-[48px] w-[48px] items-center justify-center rounded-full text-black transition-colors hover:bg-[#aadf3a]"
+                  className="flex h-[48px] w-[48px] cursor-pointer items-center justify-center rounded-full border border-black/10 text-black transition-colors hover:bg-[#aadf3a]"
                 >
                   <ChevronRight size={32} strokeWidth={1.75} />
                 </button>

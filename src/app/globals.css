@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 @theme {
+  --breakpoint-xl: 1440px;
+
   --color-ink: #000000;
   --color-paper: #ffffff;
   --color-muted: #706b6b;
@@ -37,8 +39,7 @@ body {
 
 @media (min-width: 1024px) {
   .container-page {
-    width: 80%;
-    padding-inline: 0;
+    padding-inline: 80px;
   }
 }
 

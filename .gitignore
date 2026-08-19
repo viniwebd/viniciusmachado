@@ -18,3 +18,7 @@ npm-debug.log*
 # ide
 .vscode/
 .idea/
+
+# files
+docs
+graphify-out
