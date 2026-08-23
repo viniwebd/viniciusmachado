@@ -53,7 +53,7 @@ export function Hero() {
 
   return (
     <section id="home" className="w-full bg-white">
-      <div className="container-page flex flex-col items-start max-w-[855px] gap-[24px] pt-[64px] pb-[64px] min-[425px]:pt-[96px] md:pt-[124px] md:pb-[80px] lg:pt-[132px] lg:pb-[96px]">
+      <div className="container-page flex flex-col items-start max-w-[855px] gap-[24px] pt-[124px] pb-[64px] md:pb-[80px] lg:pb-[96px]">
         <p
           ref={labelRef}
           className="text-[14px] leading-[normal] tracking-[-0.045em] text-black lg:text-[24px]"

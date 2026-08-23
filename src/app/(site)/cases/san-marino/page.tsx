@@ -106,7 +106,7 @@ export default function SanMarinoCase() {
     <>
       <PageTransition>
       <section id="hero" className="w-full bg-white">
-        <div className="container-page flex flex-col gap-[32px] pt-[96px] pb-[64px] md:pt-[124px] md:pb-[80px] lg:pt-[132px] lg:pb-[96px]">
+        <div className="container-page flex flex-col gap-[32px] pt-[124px] pb-[64px] md:pb-[80px] lg:pb-[96px]">
           <div className="flex flex-col gap-[16px]">
             <h1 className="max-w-[855px] text-[32px] font-medium leading-[38px] tracking-[-0.045em] text-black min-[425px]:text-[36px] min-[425px]:leading-[42px] lg:text-[52px] lg:leading-[56px]">
               Levando uma concessionária de 42% a 60% de Market Share.
