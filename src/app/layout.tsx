@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 const SITE_URL = "https://viniciusmachado.com";
-const SITE_TITLE = "Vinicius Machado — Web Designer";
+const SITE_TITLE = "Vinicius Machado | Web Designer";
 const SITE_DESCRIPTION =
   "Freelancer com cerca de 3 anos de experiência em web design e UI, ajudando marcas a transformar ideias em sites e produtos digitais bonitos e funcionais.";
 

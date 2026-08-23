@@ -14,7 +14,7 @@ const nextProject =
   projects[(currentIndex + 1) % projects.length] ?? projects[0];
 
 export const metadata: Metadata = {
-  title: "San Marino Fiat — Vinicius Machado",
+  title: "Case San Marino | Vinicius Machado",
   description:
     "Levando uma concessionária de 42% a 60% de Market Share no Rio Grande do Sul.",
 };
