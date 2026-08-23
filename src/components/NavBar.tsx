@@ -3,7 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { HoverRoll } from "@/components/ui/HoverRoll";
+import { RollingClock } from "@/components/ui/RollingClock";
 
 const navItems = [
   { label: "Projetos", href: "/#projetos" },
@@ -23,11 +25,12 @@ function useLocalTime() {
       const now = new Date();
       const hours = now.getHours() % 12 || 12;
       const minutes = now.getMinutes().toString().padStart(2, "0");
+      const seconds = now.getSeconds().toString().padStart(2, "0");
       const suffix = now.getHours() >= 12 ? "PM" : "AM";
-      setTime(`${hours}:${minutes} ${suffix}`);
+      setTime(`${hours}:${minutes}:${seconds} ${suffix}`);
     };
     tick();
-    const id = window.setInterval(tick, 30_000);
+    const id = window.setInterval(tick, 1_000);
     return () => window.clearInterval(id);
   }, []);
 
@@ -37,6 +40,8 @@ function useLocalTime() {
 export function NavBar() {
   const navRef = useRef<HTMLElement>(null);
   const time = useLocalTime();
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     if (!navRef.current) return;
@@ -54,12 +59,22 @@ export function NavBar() {
       style={{ opacity: 0 }}
     >
       <div className="container-page flex items-center justify-between gap-[16px] py-[16px]">
-        <Link
-          href="/#home"
-          className="text-[18px] font-normal leading-[20px] tracking-[-0.045em] text-black md:text-[16px] lg:text-[18px]"
-        >
-          Vinicius Machado
-        </Link>
+        {isHome ? (
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event("scroll-to-top"))}
+            className="cursor-pointer text-[18px] font-normal leading-[20px] tracking-[-0.045em] text-black md:text-[16px] lg:text-[18px]"
+          >
+            Vinicius Machado
+          </button>
+        ) : (
+          <Link
+            href="/"
+            className="text-[18px] font-normal leading-[20px] tracking-[-0.045em] text-black md:text-[16px] lg:text-[18px]"
+          >
+            Vinicius Machado
+          </Link>
+        )}
 
         <div className="hidden items-center gap-[24px] text-[16px] leading-[20px] tracking-[-0.045em] text-black md:flex lg:text-[18px]">
           {navItems.map((item) => (
@@ -77,7 +92,9 @@ export function NavBar() {
         </div>
 
         <div className="flex flex-col items-end gap-[4px] text-right text-[14px] leading-[20px] tracking-[-0.045em] text-black min-[425px]:flex-row min-[425px]:items-center min-[425px]:gap-[16px] min-[425px]:text-[16px] lg:text-[18px]">
-          <span suppressHydrationWarning>{time || " "}</span>
+          <span suppressHydrationWarning>
+            <RollingClock text={time || " "} />
+          </span>
           <span>Gravataí, RS</span>
         </div>
       </div>

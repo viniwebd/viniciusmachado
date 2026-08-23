@@ -28,6 +28,7 @@ html,
 body {
   background: #ffffff;
   color: #000000;
+  overflow-x: hidden;
 }
 
 .container-page {

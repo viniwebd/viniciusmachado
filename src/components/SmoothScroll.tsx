@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,6 +12,10 @@ if (typeof window !== "undefined") {
 }
 
 export function SmoothScroll() {
+  const pathname = usePathname();
+  const lenisRef = useRef<Lenis | null>(null);
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
     // GSAP-style easing (power4.out) with slightly longer duration for
     // that buttery ScrollSmoother feel.
@@ -19,6 +24,7 @@ export function SmoothScroll() {
       easing: (t) => 1 - Math.pow(1 - t, 4),
       smoothWheel: true,
     });
+    lenisRef.current = lenis;
 
     // Bridge Lenis → ScrollTrigger so scroll-linked animations stay in sync.
     lenis.on("scroll", ScrollTrigger.update);
@@ -49,6 +55,7 @@ export function SmoothScroll() {
         return;
       }
 
+
       const el = document.getElementById(match[1]);
       if (!el) return;
 
@@ -58,12 +65,31 @@ export function SmoothScroll() {
 
     document.addEventListener("click", handleClick);
 
+    // Plain window event so any button (e.g. Footer's "Voltar para o topo")
+    // can trigger a smooth scroll-to-top without needing an href/anchor —
+    // avoids Next's Link pushing a "#top" hash into the URL.
+    const handleScrollTop = () => lenis.scrollTo(0, { duration: 1.4 });
+    window.addEventListener("scroll-to-top", handleScrollTop);
+
     return () => {
       gsap.ticker.remove(raf);
       document.removeEventListener("click", handleClick);
+      window.removeEventListener("scroll-to-top", handleScrollTop);
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
+
+  // Route changes leave Lenis's internal scroll target stuck at the old
+  // position, fighting Next.js's scroll-to-top on the next RAF tick. Skip
+  // the very first run so a direct deep link (e.g. /#projetos) still works.
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    lenisRef.current?.scrollTo(0, { immediate: true });
+  }, [pathname]);
 
   return null;
 }

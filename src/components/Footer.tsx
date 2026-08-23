@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, type RefObject } from "react";
-import Link from "next/link";
 import { ArrowUpRight, Copy } from "lucide-react";
 import { HoverRoll } from "@/components/ui/HoverRoll";
 
@@ -332,16 +331,17 @@ export function Footer({ fixed = true }: { fixed?: boolean } = {}) {
             © 2026 Vinicius Machado. Todos os direitos reservados.
           </p>
 
-          <Link
-            href="/#home"
-            className="group inline-flex items-center gap-[8px] text-[14px] leading-none tracking-[-0.015em] text-[#c3c0c0]"
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event("scroll-to-top"))}
+            className="group inline-flex cursor-pointer items-center gap-[8px] text-[14px] leading-none tracking-[-0.015em] text-[#c3c0c0]"
           >
             <HoverRoll text="Voltar para o topo" />
             <ArrowUpRight
               className="h-[14px] w-[14px] -rotate-45"
               strokeWidth={1.75}
             />
-          </Link>
+          </button>
         </div>
       </div>
     </footer>

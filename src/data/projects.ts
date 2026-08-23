@@ -17,7 +17,7 @@ export const projects: ProjectData[] = [
     result: "Resultado: conversão de Ads dobrou (+100%)",
     image: "/assets/project-sanmarino.png",
     tags: ["WordPress", "Jet Engine", "UI Design", "Site Institucional", "Integrações"],
-    liveUrl: "#",
+    liveUrl: "https://sanmarinofiat.com.br/",
   },
   {
     id: "ogliari",
@@ -26,15 +26,6 @@ export const projects: ProjectData[] = [
       "Site que transforma busca por advogado em contato, com credibilidade B2C pro escritório de advocacia.",
     image: "/assets/project-ogliari.png",
     tags: ["WordPress", "UI Design", "Site Institucional"],
-    liveUrl: "#",
-  },
-  {
-    id: "izex",
-    title: "Izex Services LLC",
-    pitch:
-      "Landing page bilíngue que converte lead US para PME brasileira de serviços.",
-    image: "/assets/project-izex.png",
-    tags: ["WordPress", "UI Design", "Site Institucional", "Landing Page"],
     liveUrl: "#",
   },
 ];
