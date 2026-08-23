@@ -39,7 +39,6 @@ type SolutionBlock = {
   title: string;
   body: ReactNode;
   result?: string;
-  image: string;
 };
 
 const solutionBlocks: SolutionBlock[] = [
@@ -48,7 +47,6 @@ const solutionBlocks: SolutionBlock[] = [
     body: "Site reconstruído em WordPress: San Marino cadastra veículo, atualiza vitrine, decide campanha, sem abrir chamado pra ninguém. + Otimização de performance.",
     result:
       "Resultado: a conversão do Google Ads dobrou, saindo de 7,46% pra 14,78%.",
-    image: "site San Marino",
   },
   {
     title: "Formulário manda lead direto pro CRM",
@@ -64,7 +62,6 @@ const solutionBlocks: SolutionBlock[] = [
         .
       </>
     ),
-    image: "fluxo n8n",
   },
   {
     title: "WhatsApp que já sabe pra onde ir",
@@ -76,7 +73,6 @@ const solutionBlocks: SolutionBlock[] = [
         resolvido com scripts adicionais.
       </>
     ),
-    image: "botão WhatsApp",
   },
   {
     title: "Site que roda em qualquer tela da loja",
@@ -87,7 +83,6 @@ const solutionBlocks: SolutionBlock[] = [
         , não só desktop e celular.
       </>
     ),
-    image: "telas responsivas",
   },
   {
     title: "GA4 unificado entre os dois sites",
@@ -103,7 +98,6 @@ const solutionBlocks: SolutionBlock[] = [
         , não importa se o caminho começou no site Fiat ou no Multimarcas.
       </>
     ),
-    image: "dashboard GA4",
   },
 ];
 
@@ -241,21 +235,8 @@ export default function SanMarinoCase() {
                     <p className="font-medium text-black">{block.result}</p>
                   )}
                 </div>
-                <div className="flex aspect-video w-full items-center justify-center rounded-[16px] bg-black/5">
-                  <p className="text-[14px] text-[#706b6b]">
-                    [imagem: {block.image}]
-                  </p>
-                </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="ui-final" className="w-full bg-white">
-        <div className="container-page py-[64px] md:py-[80px] lg:py-[96px]">
-          <div className="flex aspect-video w-full items-center justify-center rounded-[16px] bg-black/5">
-            <p className="text-[14px] text-[#706b6b]">[imagem: UI final]</p>
           </div>
         </div>
       </section>
