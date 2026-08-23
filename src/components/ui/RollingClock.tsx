@@ -9,7 +9,13 @@ export function RollingClock({ text }: { text: string }) {
         /\d/.test(char) ? (
           <RollingDigit key={i} digit={char} />
         ) : (
-          <span key={i}>{char}</span>
+          <span
+            key={i}
+            className="inline-block align-bottom"
+            style={{ height: "1em", lineHeight: "1em" }}
+          >
+            {char}
+          </span>
         )
       )}
     </span>
