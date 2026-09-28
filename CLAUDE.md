@@ -2,7 +2,7 @@
 
 **Objetivo**: Site pessoal de portfólio para prospecção de vagas PJ e projetos freelancer.
 **Domínio**: [viniciusmachado.com](https://viniciusmachado.com)
-**Status**: 🚀 Em produção (home reescrita conforme Figma, copy final aplicada em código) | 🔄 Iniciativa ativa de reestruturação (ver abaixo) — falta construir as páginas de case dedicadas
+**Status**: 🚀 Em produção (home reescrita conforme Figma, copy final aplicada em código) | 🔄 Iniciativa ativa de reestruturação (ver abaixo) — case San Marino implementado em `/cases/san-marino`, faltam os outros cases (`ogliari`, `izex`)
 **⚠️ REGRA #0**: **AJUSTES NO FIGMA PRIMEIRO, CÓDIGO DEPOIS.** Ver seção "REGRA #0" abaixo antes de qualquer ação.
 **Repositório**: https://github.com/viniwebd/viniciusmachado
 
@@ -19,13 +19,13 @@ Reestruturação da home concluída (Figma + código). Em andamento: migrar case
 3. **`docs/case-study-reference-apparicio.md`** — análise do portfolio antigo de Apparício Junior (referência, não template — superado pelo §9 do guide, que já reflete o portfolio novo dele).
 4. **`docs/portfolio-references-synthesis.md`** — síntese comparativa dos 3 portfolios sênior de referência (Apparício, Cate Silva, Sami Parvez).
 5. **`docs/carreira-vinicius-machado.md`** — brain sobre o Vinicius: carreira, experiência, projetos, skills, e o case San Marino completo (contexto, solução técnica, resultados reais, reflexão). Fonte de fatos reais para escrever bio/case studies. Contém diretrizes de escrita. Vinicius envia atualizações incrementais — sempre reler antes de escrever qualquer copy sobre ele.
-6. **`docs/case-san-marino-copy.md`** — copy final revisada do case San Marino (título, contexto, problema, solução em blocos, resultados, meu papel, reflexão), já passada pelo filtro do guide §1–§10. Pronta pra aplicar manual no Figma; ainda não implementada em `/cases/san-marino` (rota não existe em código ainda).
+6. **`docs/case-san-marino-copy.md`** — copy final revisada do case San Marino (título, contexto, problema, solução em blocos, resultados, meu papel, reflexão), já passada pelo filtro do guide §1–§10. **Implementada em código** em `src/app/(site)/cases/san-marino/page.tsx`.
 
 ### Decisões consolidadas
 
 | # | Decisão | Escolha |
 |---|---|---|
-| 1 | Cases em páginas dedicadas `/cases/[slug]` (não modal) | ✅ SIM — modal (`ProjectModal.tsx`) removido do código. Cards de projeto na home já linkam pra `/cases/{id}`, rota ainda não existe (404 até ser construída) |
+| 1 | Cases em páginas dedicadas `/cases/[slug]` (não modal) | ✅ SIM — modal (`ProjectModal.tsx`) removido do código. `san-marino` implementado; `ogliari`/`izex` ainda dão 404 |
 | 2 | Template de case | `portfolio-guide.md` §7 (9 seções), **flexível** — nem todo projeto terá tudo (Processo é omitido se não houver material real). Melhor omitir seção do que preencher com genérico |
 | 3 | Seção "Capacidades e Ferramentas" na home | ✅ SIM — implementada em Figma e código (`Capabilities.tsx`) |
 | 4 | Filtro de cliente ("trabalho com quem…") | ❌ NÃO (posicionamento aberto por ora) |
@@ -81,7 +81,7 @@ Página separada `Design System — M3`, **paralela** à página `Design System`
 
 - **Home**: copy final aplicada em Figma **e** em código (Hero, About, Capabilities, Projects, Testimonials, Footer, NavBar). Passou por várias rodadas de revisão de linguagem (ver `portfolio-guide.md` §8–§10) — H1 e Sobre mim reescritos múltiplas vezes até bater com as regras (sem "freelancer"/"focado em", sem travessão, sem nome de ferramenta no H1, primeira pessoa no Sobre).
 - **Responsividade**: retrabalhada em profundidade — breakpoint custom `xl: 1440px` adicionado (Tailwind v4 só tem até `lg: 1024px` por padrão), `.container-page` trocou de `width: 80%` fluido pra `padding-inline: 80px` fixo a partir de 1024px (resolve alinhamento em 1024 e 1440 ao mesmo tempo). Tiers ajustados manualmente em 768px, 425px e 320px pra Hero, NavBar, Footer, Testimonials.
-- **Case San Marino**: construído e reconstruído várias vezes no Figma (frame `Portfolio / Desktop` node `208:396`), seguindo a estrutura de 9 seções do guide §7, revisado contra §8/§9/§10. Copy final replicada em `docs/case-san-marino-copy.md` pra aplicar manual (Figma ficou bloqueado por causa do seat). **Ainda não implementado em código** — rota `/cases/san-marino` não existe.
+- **Case San Marino**: construído e reconstruído várias vezes no Figma (frame `Portfolio / Desktop` node `208:396`), seguindo a estrutura de 9 seções do guide §7, revisado contra §8/§9/§10. Copy final replicada em `docs/case-san-marino-copy.md`. **Implementado em código** em `src/app/(site)/cases/san-marino/page.tsx`.
 - **Popup de projeto removido**: `ProjectModal.tsx` deletado, `description`/`skills`/`screenshots` removidos de `ProjectData`. Cards da home agora são só imagem, linkando pra `/cases/{id}` (ainda 404).
 - **Analytics**: Microsoft Clarity instalado (`@microsoft/clarity`), inicializado em `ClarityAnalytics.tsx` no layout raiz.
 - **SEO**: `sitemap.ts` e `robots.ts` adicionados (convenção nativa do Next.js App Router), `/ds` excluído de ambos.
@@ -277,7 +277,7 @@ src/
 | Rota | Descrição |
 | --- | --- |
 | `/` | Home (Hero, Projects, About, Capabilities, Testimonials, Footer) |
-| `/cases/[slug]` | **Planejada, não implementada.** Cards da home já linkam pra cá (`san-marino`, `ogliari`, `izex`) — hoje dá 404 |
+| `/cases/[slug]` | `san-marino` implementado (`src/app/(site)/cases/san-marino/page.tsx`). `ogliari` e `izex` ainda não existem — 404 |
 | `/bio` | Link-in-bio, fora do route group `(site)` |
 | `/ds` | Design system reference (não indexado, `robots: noindex`, excluído do sitemap) |
 | `/politica-de-privacidade` | LGPD |
@@ -297,40 +297,23 @@ src/
 
 ---
 
-## Infraestrutura (não alterada)
+## Infraestrutura
 
-Mesmo servidor do Studio Vyn — sem custo adicional.
+Hospedado na Vercel (projeto `viniciusmachado`, team `viniwebds-projects`). Migrado de VPS própria em 2026-09.
 
-| Recurso       | Detalhe                                                |
-| ------------- | ------------------------------------------------------ |
-| Orquestração  | Portainer                                              |
-| Proxy reverso | Traefik                                                |
-| SSL           | Let's Encrypt via Traefik (`certresolver=letsencrypt`) |
-| Rede Docker   | `traefik_network` (external, já existe)                |
+| Recurso  | Detalhe                                          |
+| -------- | ------------------------------------------------- |
+| Deploy   | Vercel (build/runtime nativo Next.js)              |
+| SSL      | Emitido automaticamente pela Vercel (Let's Encrypt) |
+| DNS      | Cloudflare (proxy desligado nos registros do domínio, aponta via CNAME pro alvo Vercel) |
 
 ### Deploy
 
 ```
-git push → webhook Portainer → rebuild automático do container
+git push main → GitHub integration → build + deploy automático na Vercel
 ```
 
-Fluxo:
-1. Push para `main` no GitHub
-2. Portainer detecta via webhook e executa `docker-compose up --build`
-3. Traefik roteia `viniciusmachado.com` para o container automaticamente
-4. SSL renovado automaticamente
-
-### Docker
-
-- `Dockerfile` multi-stage: node:20 (build) → nginx:alpine (serve `.next/`)
-- `docker-compose.yml`: serviço `web` + labels Traefik para `viniciusmachado.com` e `www.viniciusmachado.com`
-
-### DNS
-
-```
-A     @    → IP do servidor
-CNAME www  → viniciusmachado.com
-```
+Domínio primário: `viniciusmachado.com` (sem `www`). `www.viniciusmachado.com` redireciona pra ele (308).
 
 ---
 

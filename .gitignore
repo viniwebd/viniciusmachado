@@ -4,6 +4,7 @@ node_modules/
 # next
 .next/
 out/
+*.tsbuildinfo
 
 # env
 .env
@@ -23,3 +24,4 @@ npm-debug.log*
 docs
 graphify-out
 screenshot
+.vercel
